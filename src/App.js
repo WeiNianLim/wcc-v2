@@ -1,26 +1,39 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import { withStyles } from "@material-ui/core/styles";
+import AppBar from "@material-ui/core/AppBar";
+import Toolbar from "@material-ui/core/Toolbar";
+import theme from './theme.js'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component{
+
+  render(){
+
+    const { classes, width } = this.props;
+    const url = window.location.href;
+
+    return (
+      <div>
+        <AppBar position="static" style={{ backgroundColor: theme.palette.primary.dark}}>
+          <Toolbar>
+            <img
+              src={
+                url == "http://localhost:3000/"
+                  ? "/images/logo.png"
+                  : "https://weinianlim.github.io/William-Can-Code/images/logo.png"
+              }
+              style={{
+                width: "auto",
+                maxHeight: "45px"
+              }}
+            />
+          </Toolbar>
+        </AppBar>
+      </div>
+    )
+  }
 }
 
-export default App;
+
+
+export default App
