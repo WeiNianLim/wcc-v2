@@ -18,6 +18,13 @@ import Typography from "@material-ui/core/Typography";
 import Drawer from "@material-ui/core/Drawer";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
+import Grid from '@material-ui/core/Grid';
+import Divider from "@material-ui/core/Divider";
+import Slide from '@material-ui/core/Slide';
+import useScrollTrigger from '@material-ui/core/useScrollTrigger';
+import ForwardIcon from "@material-ui/icons/Forward";
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemText from '@material-ui/core/ListItemText';
 
 const styles = {
   appBar: {
@@ -32,6 +39,12 @@ const styles = {
   menuButton: {
     display: 'flex',
     color: theme.palette.secondary.light
+  },
+  divider: {
+    margin: '10px 0 0 0',
+    height: 3,
+    width: "80px",
+    backgroundColor: theme.palette.primary.main
   },
   button: {
     margin: theme.spacing(1),
@@ -50,6 +63,17 @@ const styles = {
     marginLeft: "auto",
     maxWidth: 1200,
   }
+}
+
+function HideOnScroll(props) {
+  const { children, window } = props;
+  const trigger = useScrollTrigger({ target: window ? window() : undefined });
+
+  return (
+    <Slide appear={false} direction="down" in={!trigger}>
+      {children}
+    </Slide>
+  );
 }
 
 class App extends Component {
@@ -78,76 +102,11 @@ class App extends Component {
     } = this.props;
     const url = window.location.href;
 
-    const renderDesktopAppBar = {
-
-    }
-
-    const renderMobileAppBar = {
-
-    }
-
     return (
-      <div style={{ background: theme.palette.secondary.dark }}>
-        <AppBar position="static" className={classes.appBar}>
-          {isWidthUp("sm", width) ? (
-            <Toolbar>
-              <img src={
-                url == "http://localhost:3000/"
-                  ? "/images/logo.png"
-                  : "https://weinianlim.github.io/wcc2/images/logo.png"
-              }
-                style={{
-                  width: "auto",
-                  maxHeight: "45px"
-                }} />
-              <div className={classes.grow}></div>
-              <Button
-                className={classes.button}
-                classes={{
-                  root: classes.buttonRoot,
-                  label: classes.buttonLabel
-                }}
-              >
-                About
-              </Button>
-              <Button
-                className={classes.button}
-                classes={{
-                  root: classes.buttonRoot,
-                  label: classes.buttonLabel
-                }}
-              >
-                Experience
-              </Button>
-              <Button
-                className={classes.button}
-                classes={{
-                  root: classes.buttonRoot,
-                  label: classes.buttonLabel
-                }}
-              >
-                Work
-              </Button>
-              <Button
-                className={classes.button}
-                classes={{
-                  root: classes.buttonRoot,
-                  label: classes.buttonLabel
-                }}
-              >
-                Contact
-              </Button>
-              <Button
-                className={classes.button}
-                classes={{
-                  root: classes.buttonRoot,
-                  label: classes.buttonLabel
-                }}
-              >
-                Resume
-              </Button>
-            </Toolbar>
-          ) : (
+      <div style={{ background: theme.palette.secondary.dark, paddingTop: "150px" }}>
+        <HideOnScroll {...this.props}>
+          <AppBar className={classes.appBar}>
+            {isWidthUp("sm", width) ? (
               <Toolbar>
                 <img src={
                   url == "http://localhost:3000/"
@@ -159,12 +118,72 @@ class App extends Component {
                     maxHeight: "45px"
                   }} />
                 <div className={classes.grow}></div>
-                <IconButton className={classes.menuButton} onClick={this.handleDrawerOpen}>
-                  <MenuIcon />
-                </IconButton>
+                <Button
+                  className={classes.button}
+                  classes={{
+                    root: classes.buttonRoot,
+                    label: classes.buttonLabel
+                  }}
+                >
+                  About
+              </Button>
+                <Button
+                  className={classes.button}
+                  classes={{
+                    root: classes.buttonRoot,
+                    label: classes.buttonLabel
+                  }}
+                >
+                  Experience
+              </Button>
+                <Button
+                  className={classes.button}
+                  classes={{
+                    root: classes.buttonRoot,
+                    label: classes.buttonLabel
+                  }}
+                >
+                  Work
+              </Button>
+                <Button
+                  className={classes.button}
+                  classes={{
+                    root: classes.buttonRoot,
+                    label: classes.buttonLabel
+                  }}
+                >
+                  Contact
+              </Button>
+                <Button
+                  className={classes.button}
+                  classes={{
+                    root: classes.buttonRoot,
+                    label: classes.buttonLabel
+                  }}
+                >
+                  Resume
+              </Button>
               </Toolbar>
-            )}
-        </AppBar>
+            ) : (
+                <Toolbar>
+                  <img
+                    src={
+                      url == "http://localhost:3000/"
+                        ? "/images/logo.png"
+                        : "https://weinianlim.github.io/wcc2/images/logo.png"
+                    }
+                    style={{
+                      width: "auto",
+                      maxHeight: "45px"
+                    }} />
+                  <div className={classes.grow}></div>
+                  <IconButton className={classes.menuButton} onClick={this.handleDrawerOpen}>
+                    <MenuIcon />
+                  </IconButton>
+                </Toolbar>
+              )}
+          </AppBar>
+        </HideOnScroll>
         <Drawer open={this.state.open} onClose={this.handleDrawerClose} anchor='right'>
           <List>
             <ListItem>About</ListItem>
@@ -186,33 +205,121 @@ class App extends Component {
           </List>
         </Drawer>
         <main className={classes.main}>
-        <section>
-          <Typography variant="h1" style={{ marginTop: "100px", fontFamily: "Roboto", fontWeight: "500", color: theme.palette.primary.main }}>
-            William Lim
-          </Typography>
-          <Typography variant="h1" style={{ marginTop: "10px", fontFamily: "Roboto", fontWeight: "450", color: theme.palette.secondary.light }}>
-            I build Web Application
-          </Typography>
-          <Typography variant="h6" style={{ marginTop: "50px", fontFamily: "Roboto", fontWeight: "400", color: theme.palette.secondary.light }}>
-            I am a software engineer based in Vancouver, BC specializing in <br /> building exceptional, responsive and high quality <br /> Websites and Web Applications
-          </Typography>
-          <Button 
-            variant="outlined" 
-            className={classes.button} 
-            classes={{
-              root: classes.contactButtonRoot,
-              label: classes.buttonLabel
-            }}
-            color="theme.palette.primary.main"
-            style={{marginTop: "50px", marginLeft: "0px"}}
-          >
-            Let's talk
-          </Button>
+          <section>
+            <Typography variant="h1" style={{ fontFamily: "Roboto", fontWeight: "500", color: theme.palette.primary.main }}>
+              William Lim
+            </Typography>
+            <Typography variant="h1" style={{ marginTop: "10px", fontFamily: "Roboto", fontWeight: "450", color: theme.palette.secondary.light }}>
+              I build Web Application
+            </Typography>
+            <Typography variant="h6" style={{ marginTop: "50px", fontFamily: "Roboto", fontWeight: "400", color: theme.palette.secondary.main }}>
+              I am a software engineer based in Vancouver, BC specializing in <br /> building exceptional, responsive and high quality <br /> Websites and Web Applications
+            </Typography>
+            <Button
+              variant="outlined"
+              className={classes.button}
+              classes={{
+                root: classes.contactButtonRoot,
+                label: classes.buttonLabel
+              }}
+              color="theme.palette.primary.main"
+              style={{ marginTop: "50px", marginLeft: "0px" }}
+            >
+              Let's talk
+            </Button>
           </section>
-          <section style={{marginTop: "200px"}}>
-          <Typography variant="h4" style={{ marginTop: "10px", fontFamily: "Roboto", fontWeight: "500", color: theme.palette.secondary.light }}>
-            About Me
-          </Typography>
+          <section style={{ marginTop: "200px" }}>
+            <Typography variant="h4" style={{ marginTop: "10px", fontFamily: "Roboto", fontWeight: "500", color: theme.palette.secondary.light }}>
+              About Me
+            </Typography>
+            <Divider variant="inset" className={classes.divider} />
+            <Grid container spacing={3}>
+              <Grid item xs={12} sm={8}>
+                <Typography variant="h6" style={{ marginTop: "50px", fontFamily: "Roboto", fontWeight: "400", color: theme.palette.secondary.main }}>
+                  Hi there, I'm William! I am a software engineer located in Vancouver, BC.<br />
+                  I enjoy building exceptional websites and web application that has <br />
+                  awesome user-interface.
+                </Typography>
+                <Typography variant="h6" style={{ marginTop: "20px", fontFamily: "Roboto", fontWeight: "400", color: theme.palette.secondary.main }}>
+                  I am currently a Full Stack Developer at Porton Health Corp, <br />
+                  a vancouver based startup that provides telehealth platform.
+                </Typography>
+                <Typography variant="h6" style={{ marginTop: "20px", fontFamily: "Roboto", fontWeight: "400", color: theme.palette.secondary.main }}>
+                  Here are some of the Technologies that I am workign with daily,
+                </Typography>
+                <Grid container spacing={3}>
+                  <Grid item xs={12} sm={6}>
+                    <List >
+                      <ListItem>
+                        <ListItemIcon>
+                          <ForwardIcon style={{ color: theme.palette.primary.dark }} />
+                        </ListItemIcon>
+                        <ListItemText style={{ fontFamily: "Roboto", fontWeight: "500", color: theme.palette.secondary.main }}>
+                          Javascript(ES5 & ES6)
+                        </ListItemText>
+                      </ListItem>
+                      <ListItem>
+                        <ListItemIcon>
+                          <ForwardIcon style={{ color: theme.palette.primary.dark }} />
+                        </ListItemIcon>
+                        <ListItemText style={{ fontFamily: "Roboto", fontWeight: "500", color: theme.palette.secondary.main }}>
+                          React
+                        </ListItemText>
+                      </ListItem>
+                      <ListItem>
+                        <ListItemIcon>
+                          <ForwardIcon style={{ color: theme.palette.primary.dark }} />
+                        </ListItemIcon>
+                        <ListItemText style={{ fontFamily: "Roboto", fontWeight: "500", color: theme.palette.secondary.main }}>
+                          Material-UI
+                        </ListItemText>
+                      </ListItem>
+                    </List>
+                  </Grid>
+                  <Grid item xs={12} sm={6}>
+                    <List >
+                      <ListItem>
+                        <ListItemIcon>
+                          <ForwardIcon style={{ color: theme.palette.primary.dark }} />
+                        </ListItemIcon>
+                        <ListItemText style={{ fontFamily: "Roboto", fontWeight: "500", color: theme.palette.secondary.main }}>
+                          HTML & CSS
+                        </ListItemText>
+                      </ListItem>
+                      <ListItem>
+                        <ListItemIcon>
+                          <ForwardIcon style={{ color: theme.palette.primary.dark }} />
+                        </ListItemIcon>
+                        <ListItemText style={{ fontFamily: "Roboto", fontWeight: "500", color: theme.palette.secondary.main }}>
+                          Node.js
+                        </ListItemText>
+                      </ListItem>
+                      <ListItem>
+                        <ListItemIcon>
+                          <ForwardIcon style={{ color: theme.palette.primary.dark }} />
+                        </ListItemIcon>
+                        <ListItemText style={{ fontFamily: "Roboto", fontWeight: "500", color: theme.palette.secondary.main }}>
+                          Material-UI
+                        </ListItemText>
+                      </ListItem>
+                    </List>
+                  </Grid>
+                </Grid>
+              </Grid>
+              <Grid item xs={12} sm={4}>
+                <img
+                  src={
+                    url == "http://localhost:3000/"
+                      ? "/images/profile.jpg"
+                      : "https://weinianlim.github.io/wcc2/images/profile.jpg"
+                  }
+                  style={{ marginTop: "50px", borderRadius: "10px", maxWidth: "300px", height: "auto" }}
+                />
+              </Grid>
+            </Grid>
+          </section>
+          <section style={{ marginTop: "200px" }}>
+            
           </section>
         </main>
       </div>

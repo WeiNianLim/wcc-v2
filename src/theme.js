@@ -9,7 +9,7 @@ const defaultTheme = {
     },
     secondary: {
       light: "#C5C6C7",
-      main: "#1F2833",
+      main: "#566a84",
       dark: "#0B0C10"
     }
   }
