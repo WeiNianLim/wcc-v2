@@ -26,7 +26,8 @@ class App extends Component{
 
     return (
       <div>
-        <AppBar position="static" style={{ backgroundColor: theme.palette.primary.dark}}>
+        <h1>William's Page</h1>
+        {/* <AppBar position="static" style={{ backgroundColor: theme.palette.primary.dark}}>
           <Toolbar>
             <img
               src={
@@ -60,7 +61,7 @@ class App extends Component{
               </a>
             </ListItem>
           </List>
-        </Drawer>
+        </Drawer> */}
       </div>
     )
   }
