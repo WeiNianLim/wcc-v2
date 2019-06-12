@@ -7,6 +7,18 @@ import theme from './theme.js'
 
 class App extends Component{
 
+  state={
+    open: false
+  }
+
+  handleDrawerOpen = () => {
+    this.setState({ open: true });
+  };
+
+  handleDrawerClose = () => {
+    this.setState({ open: false });
+  };
+
   render(){
 
     const { classes, width } = this.props;
@@ -27,8 +39,28 @@ class App extends Component{
                 maxHeight: "45px"
               }}
             />
+            <IconButton onClick={this.handleDrawerOpen}>
+              <MenuIcon style={{ color: "white" }} />
+            </IconButton>
           </Toolbar>
         </AppBar>
+        <Drawer open={this.state.open} onClose={this.handleDrawerClose}>
+          <List>
+            <ListItem>
+              <a
+                href={
+                  url == "http://localhost:3000/"
+                    ? "/images/resume.pdf"
+                    : "https://weinianlim.github.io/William-Can-Code/images/resume.pdf"
+                }
+                target="_blank"
+                className={classes.resumeInDrawer}
+              >
+                Resume
+              </a>
+            </ListItem>
+          </List>
+        </Drawer>
       </div>
     )
   }
