@@ -3,13 +3,13 @@ import { createMuiTheme } from '@material-ui/core/styles';
 const defaultTheme = {
   palette: {
     primary: {
-      light: "#2E9CCA",
-      main: "#29648A",
-      dark: "#25274D"
+      light: "#66FCF1",
+      main: "#45A29E",
     },
     secondary: {
-      light: "#AAABB8",
-      main: "#464866"
+      light: "#C5C6C7",
+      main: "#1F2833",
+      dark: "#0B0C10"
     }
   }
 };
