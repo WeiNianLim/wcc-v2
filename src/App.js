@@ -20,8 +20,14 @@ import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 
 const styles = {
-  grow: {
-    flexGrow: 1,
+  appBar: {
+    backgroundColor: theme.palette.secondary.dark
+  },
+  contactButtonRoot: {
+    borderWidth: 2,
+    borderColor: theme.palette.primary.main,
+    color: theme.palette.primary.main,
+    padding: "15px 30px",
   },
   menuButton: {
     display: 'flex',
@@ -34,10 +40,10 @@ const styles = {
     color: theme.palette.secondary.light
   },
   buttonLabel: {
-    textTransform: 'capitalize'
+    textTransform: 'capitalize',
   },
-  appBar: {
-    backgroundColor: theme.palette.secondary.main
+  grow: {
+    flexGrow: 1,
   },
   main: {
     marginRight: "auto",
@@ -81,7 +87,7 @@ class App extends Component {
     }
 
     return (
-      <div style={{background: theme.palette.secondary.main}}>
+      <div style={{ background: theme.palette.secondary.dark }}>
         <AppBar position="static" className={classes.appBar}>
           {isWidthUp("sm", width) ? (
             <Toolbar>
@@ -180,9 +186,34 @@ class App extends Component {
           </List>
         </Drawer>
         <main className={classes.main}>
-          <Typography variant="h1" gutterBottom style={{fontFamily: "Roboto", fontWeight: "600", color: theme.palette.secondary.light}}>
+        <section>
+          <Typography variant="h1" style={{ marginTop: "100px", fontFamily: "Roboto", fontWeight: "500", color: theme.palette.primary.main }}>
             William Lim
           </Typography>
+          <Typography variant="h1" style={{ marginTop: "10px", fontFamily: "Roboto", fontWeight: "450", color: theme.palette.secondary.light }}>
+            I build Web Application
+          </Typography>
+          <Typography variant="h6" style={{ marginTop: "50px", fontFamily: "Roboto", fontWeight: "400", color: theme.palette.secondary.light }}>
+            I am a software engineer based in Vancouver, BC specializing in <br /> building exceptional, responsive and high quality <br /> Websites and Web Applications
+          </Typography>
+          <Button 
+            variant="outlined" 
+            className={classes.button} 
+            classes={{
+              root: classes.contactButtonRoot,
+              label: classes.buttonLabel
+            }}
+            color="theme.palette.primary.main"
+            style={{marginTop: "50px", marginLeft: "0px"}}
+          >
+            Let's talk
+          </Button>
+          </section>
+          <section style={{marginTop: "200px"}}>
+          <Typography variant="h4" style={{ marginTop: "10px", fontFamily: "Roboto", fontWeight: "500", color: theme.palette.secondary.light }}>
+            About Me
+          </Typography>
+          </section>
         </main>
       </div>
     )
