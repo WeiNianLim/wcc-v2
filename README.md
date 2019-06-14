@@ -1,5 +1,5 @@
 # wcc-v2
-> This is the second iteration of my personal site built with Material-Ui and React
+> This is the second iteration of my personal site built with Material-UI and React
 
 ## Available Scripts
 
