@@ -52,6 +52,12 @@ const styles = {
       color: theme.palette.primary.main
     }
   },
+  icon: {
+    "&:hover": {
+      fontWeight: "600",
+      color: theme.palette.primary.main
+    }
+  },
   buttonRoot: {
     color: theme.palette.secondary.light
   },
@@ -687,7 +693,7 @@ class App extends Component {
               </Button>
             </Grid>
           </Grid>
-          <Typography variant="subtitle1" style={{fontFamily: "Roboto", fontWeight: "400", color: theme.palette.secondary.light }}>
+          <Typography variant="subtitle1" style={{marginTop: "5px",fontFamily: "Roboto", fontWeight: "400", color: theme.palette.secondary.light }}>
             Designed and built by William Lim
           </Typography>
         </section>
