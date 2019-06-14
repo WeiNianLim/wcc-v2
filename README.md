@@ -1,4 +1,4 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This is the second iteration of my personal site built with Material-Ui and React
 
 ## Available Scripts
 
