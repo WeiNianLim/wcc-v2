@@ -61,6 +61,9 @@ const styles = {
   buttonRoot: {
     color: theme.palette.secondary.light
   },
+  drawerButtonRoot: {
+    color: theme.palette.secondary.main
+  },
   buttonLabel: {
     textTransform: 'capitalize',
   },
@@ -162,15 +165,20 @@ class App extends Component {
                 <a
                   href="#landing"
                   className={classes.anchorTag}
-                ><img src={
-                  url === "http://localhost:3000/"
-                    ? "/images/logo.png"
-                    : "https://weinianlim.github.io/wcc2/images/logo.png"
-                }
-                  style={{
-                    width: "auto",
-                    maxHeight: "45px"
-                  }} /></a>
+                >
+                  <img 
+                    src=
+                    {
+                      url === "http://localhost:3000/"
+                      ? "/images/logo.png"
+                      : "https://weinianlim.github.io/wcc2/images/logo.png"
+                    }
+                    style={{
+                      width: "auto",
+                      maxHeight: "45px"
+                    }} 
+                  />
+                </a>
                 <div className={classes.grow}></div>
                 <Button
                   className={classes.button}
@@ -250,7 +258,7 @@ class App extends Component {
               <Button
                 className={classes.button}
                 classes={{
-                  root: classes.buttonRoot,
+                  root: classes.drawerButtonRoot,
                   label: classes.buttonLabel
                 }}
                 href="#aboutMe"
@@ -263,7 +271,7 @@ class App extends Component {
               <Button
                 className={classes.button}
                 classes={{
-                  root: classes.buttonRoot,
+                  root: classes.drawerButtonRoot,
                   label: classes.buttonLabel
                 }}
                 href="#experience"
@@ -282,7 +290,7 @@ class App extends Component {
               <Button
                 className={classes.button}
                 classes={{
-                  root: classes.buttonRoot,
+                  root: classes.drawerButtonRoot,
                   label: classes.buttonLabel
                 }}
                 href="#contact"
@@ -295,7 +303,7 @@ class App extends Component {
               <Button
                 className={classes.button}
                 classes={{
-                  root: classes.buttonRoot,
+                  root: classes.drawerButtonRoot,
                   label: classes.buttonLabel
                 }}
                 href={
