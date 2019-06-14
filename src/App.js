@@ -19,10 +19,12 @@ import useScrollTrigger from '@material-ui/core/useScrollTrigger';
 import ForwardIcon from "@material-ui/icons/NavigateNext";
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
+import Link from '@material-ui/core/Link';
 
 const styles = {
   appBar: {
     backgroundColor: theme.palette.secondary.dark,
+    boxShadow: '0px 1px 1px #de1dde',
     width: "100%",
     right: 0,
     left: 0
@@ -45,6 +47,10 @@ const styles = {
   },
   button: {
     margin: theme.spacing(1),
+    "&:hover": {
+      fontWeight: "600",
+      color: theme.palette.primary.main
+    }
   },
   buttonRoot: {
     color: theme.palette.secondary.light
@@ -63,8 +69,8 @@ const styles = {
       paddingLeft: "50px",
     },
     [theme.breakpoints.down('sm')]: {
-      paddingRight: "10px",
-      paddingLeft: "10px",
+      paddingRight: "25px",
+      paddingLeft: "25px",
     }
   },
   anchorTag: {
@@ -77,6 +83,9 @@ const styles = {
       color: theme.palette.primary.main
     }
   },
+  drawer: {
+    backgroundColor: theme.palette.secondary.dark
+  }
 }
 
 function HideOnScroll(props) {
@@ -93,7 +102,16 @@ function HideOnScroll(props) {
 class App extends Component {
 
   state = {
-    open: false
+    open: false,
+    backgroundShadow: "none",
+  }
+
+  componentDidMount() {
+    window.addEventListener("scroll", this.handleScroll);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener("scroll", this.handleScroll);
   }
 
   handleDrawerOpen = () => {
@@ -108,6 +126,19 @@ class App extends Component {
     });
   };
 
+  handleScroll = event => {
+    if (window.pageYOffset > 200) {
+      this.setState({
+        backgroundShadow:
+          "inset 0px -7px 11px -10px rgba(32,77,75,1)",
+      });
+    } else {
+      this.setState({
+        backgroundShadow: "none"
+      });
+    }
+  };
+
   render() {
 
     const {
@@ -119,7 +150,7 @@ class App extends Component {
     return (
       <div style={{ background: theme.palette.secondary.dark, margin: "0" }}>
         <HideOnScroll {...this.props}>
-          <AppBar className={classes.appBar}>
+          <AppBar className={classes.appBar} style={{ boxShadow: this.state.backgroundShadow }}>
             {isWidthUp("sm", width) ? (
               <Toolbar>
                 <a
@@ -135,41 +166,57 @@ class App extends Component {
                     maxHeight: "45px"
                   }} /></a>
                 <div className={classes.grow}></div>
-                <a
+                <Button
+                  className={classes.button}
+                  classes={{
+                    root: classes.buttonRoot,
+                    label: classes.buttonLabel
+                  }}
                   href="#aboutMe"
-                  className={classes.anchorTag}
                 >
                   About
-                </a>
-                <a
+                </Button>
+                <Button
+                  className={classes.button}
+                  classes={{
+                    root: classes.buttonRoot,
+                    label: classes.buttonLabel
+                  }}
                   href="#experience"
-                  className={classes.anchorTag}
                 >
                   Experience
-                </a>
+                </Button>
                 {/* <a
                   href="#work"
                   className={classes.anchorTag}
                 >
                   Work
                 </a> */}
-                <a
+                <Button
+                  className={classes.button}
+                  classes={{
+                    root: classes.buttonRoot,
+                    label: classes.buttonLabel
+                  }}
                   href="#contact"
-                  className={classes.anchorTag}
                 >
                   Contact
-                </a>
-                <a
+                </Button>
+                <Button
+                  className={classes.button}
+                  classes={{
+                    root: classes.buttonRoot,
+                    label: classes.buttonLabel
+                  }}
                   href={
                     url == "http://localhost:3000/"
                       ? "/images/resume.pdf"
                       : "https://weinianlim.github.io/wcc2/images/resume.pdf"
                   }
                   target="_blank"
-                  className={classes.anchorTag}
                 >
                   Resume
-                </a>
+                </Button>
               </Toolbar>
             ) : (
                 <Toolbar>
@@ -191,58 +238,99 @@ class App extends Component {
               )}
           </AppBar>
         </HideOnScroll>
-        <Drawer open={this.state.open} onClose={this.handleDrawerClose} anchor='right'>
+        <Drawer classes={{ root: classes.drawer }} open={this.state.open} onClose={this.handleDrawerClose} anchor='right'>
           <List>
-            <ListItem><a
-              href="#aboutMe"
-              className={classes.anchorTag}
-            >
-              About
-                </a></ListItem>
-            <ListItem><a
-              href="#experience"
-              className={classes.anchorTag}
-            >
-              Experience
-                </a></ListItem>
+            <ListItem>
+              <Button
+                className={classes.button}
+                classes={{
+                  root: classes.buttonRoot,
+                  label: classes.buttonLabel
+                }}
+                href="#aboutMe"
+                onClick={this.handleDrawerClose}
+              >
+                About
+              </Button>
+            </ListItem>
+            <ListItem>
+              <Button
+                className={classes.button}
+                classes={{
+                  root: classes.buttonRoot,
+                  label: classes.buttonLabel
+                }}
+                href="#experience"
+                onClick={this.handleDrawerClose}
+              >
+                Experience
+              </Button>
+            </ListItem>
             {/* <ListItem><a
                   href="#work"
                   className={classes.anchorTag}
                 >
                   Work
                 </a></ListItem> */}
-            <ListItem><a
-              href="#contact"
-              className={classes.anchorTag}
-            >
-              Contact
-                </a></ListItem>
             <ListItem>
-            <a
-                  href={
-                    url == "http://localhost:3000/"
-                      ? "/images/resume.pdf"
-                      : "https://weinianlim.github.io/wcc2/images/resume.pdf"
-                  }
-                  target="_blank"
-                  className={classes.anchorTag}
-                >
-                  Resume
-                </a>
+              <Button
+                className={classes.button}
+                classes={{
+                  root: classes.buttonRoot,
+                  label: classes.buttonLabel
+                }}
+                href="#contact"
+                onClick={this.handleDrawerClose}
+              >
+                Contact
+              </Button>
+            </ListItem>
+            <ListItem>
+              <Button
+                className={classes.button}
+                classes={{
+                  root: classes.buttonRoot,
+                  label: classes.buttonLabel
+                }}
+                href={
+                  url == "http://localhost:3000/"
+                    ? "/images/resume.pdf"
+                    : "https://weinianlim.github.io/wcc2/images/resume.pdf"
+                }
+                target="_blank"
+                onClick={this.handleDrawerClose}
+              >
+                Resume
+              </Button>
             </ListItem>
           </List>
         </Drawer>
         <main className={classes.main}>
           <section id="landing" style={{ paddingTop: "150px" }}>
-            <Typography variant="h1" style={{ fontFamily: "Roboto", fontWeight: "500", color: theme.palette.primary.main }}>
-              William Lim
-            </Typography>
-            <Typography variant="h1" style={{ marginTop: "10px", fontFamily: "Roboto", fontWeight: "450", color: theme.palette.secondary.light }}>
-              I build Web Application
-            </Typography>
-            <Typography variant="h6" style={{ marginTop: "50px", fontFamily: "Roboto", fontWeight: "400", color: theme.palette.secondary.main }}>
-              I am a software engineer based in Vancouver, BC specializing in <br /> building exceptional, responsive and high quality <br /> Websites and Web Applications
-            </Typography>
+            {isWidthUp("sm", width)
+              ? <>
+                <Typography variant="h1" style={{ fontFamily: "Roboto", fontWeight: "500", color: theme.palette.primary.main }}>
+                  William Lim
+                  </Typography>
+                <Typography variant="h1" style={{ marginTop: "10px", fontFamily: "Roboto", fontWeight: "450", color: theme.palette.secondary.light }}>
+                  I build things for the internet
+                  </Typography>
+                <Typography variant="h6" style={{ marginTop: "50px", fontFamily: "Roboto", fontWeight: "400", color: theme.palette.secondary.main }}>
+                  I am a software engineer based in Vancouver, BC specializing in <br /> building exceptional, responsive and high quality <br /> Websites and Web Applications
+                  </Typography>
+              </>
+              : <>
+                <Typography variant="h3" style={{ fontFamily: "Roboto", fontWeight: "500", color: theme.palette.primary.main }}>
+                  William Lim
+                  </Typography>
+                <Typography variant="h3" style={{ marginTop: "10px", fontFamily: "Roboto", fontWeight: "450", color: theme.palette.secondary.light }}>
+                  I build things for the internet
+                  </Typography>
+                <Typography variant="h6" style={{ marginTop: "50px", fontFamily: "Roboto", fontWeight: "400", color: theme.palette.secondary.main }}>
+                  I am a software engineer based in Vancouver, BC specializing in building exceptional, responsive and high quality websites and web applications
+                  </Typography>
+              </>
+            }
             <Button
               variant="outlined"
               className={classes.button}
@@ -251,7 +339,8 @@ class App extends Component {
                 label: classes.buttonLabel
               }}
               color="theme.palette.primary.main"
-              style={{ marginTop: "50px", marginLeft: "0px" }}
+              style={{ marginTop: "50px", marginLeft: "0px", }}
+              href="mailto:weinianlim26@gmail.com"
             >
               Let's talk
             </Button>
@@ -263,87 +352,173 @@ class App extends Component {
             <Divider variant="inset" className={classes.divider} />
             <Grid container spacing={3}>
               <Grid item xs={12} sm={8}>
-                <Typography variant="h6" style={{ marginTop: "50px", fontFamily: "Roboto", fontWeight: "400", color: theme.palette.secondary.main }}>
-                  Hi there, I'm William! I am a software engineer located in Vancouver, BC.<br />
-                  I enjoy building exceptional websites and web application that has <br />
-                  awesome user-interface.
-                </Typography>
-                <Typography variant="h6" style={{ marginTop: "20px", fontFamily: "Roboto", fontWeight: "400", color: theme.palette.secondary.main }}>
-                  I am currently a Full Stack Developer at Porton Health Corp, <br />
-                  a vancouver based startup that provides telehealth platform.
-                </Typography>
-                <Typography variant="h6" style={{ marginTop: "20px", fontFamily: "Roboto", fontWeight: "400", color: theme.palette.secondary.main }}>
-                  Here are some of the Technologies that I am workign with daily,
-                </Typography>
+                {isWidthUp("sm", width)
+                  ? <>
+                    <Typography variant="h6" style={{ marginTop: "50px", fontFamily: "Roboto", fontWeight: "400", color: theme.palette.secondary.main }}>
+                      Hi there, I'm William! I am a software engineer located in Vancouver, BC.<br />
+                      I enjoy building exceptional websites and web application that has <br />
+                      awesome user-interface.
+                    </Typography>
+                    <Typography variant="h6" style={{ marginTop: "20px", fontFamily: "Roboto", fontWeight: "400", color: theme.palette.secondary.main }}>
+                      I am currently a Full Stack Developer at Porton Health Corp, <br />
+                      a vancouver based startup that provides telehealth platform.
+                    </Typography>
+                    <Typography variant="h6" style={{ marginTop: "20px", fontFamily: "Roboto", fontWeight: "400", color: theme.palette.secondary.main }}>
+                      Here are some of the Technologies that I am working with daily,
+                    </Typography>
+                  </>
+                  : <>
+                    <Typography variant="h6" style={{ marginTop: "50px", fontFamily: "Roboto", fontWeight: "400", color: theme.palette.secondary.main }}>
+                      Hi there, I'm William! I am a software engineer located in Vancouver, BC.
+                      I enjoy building exceptional websites and web application that has
+                      awesome user-interface.
+                    </Typography>
+                    <Typography variant="h6" style={{ marginTop: "20px", fontFamily: "Roboto", fontWeight: "400", color: theme.palette.secondary.main }}>
+                      I am currently a Full Stack Developer at Porton Health Corp,
+                      a vancouver based startup that provides telehealth platform.
+                    </Typography>
+                    <Typography variant="h6" style={{ marginTop: "20px", fontFamily: "Roboto", fontWeight: "400", color: theme.palette.secondary.main }}>
+                      Here are some of the Technologies that I am working with daily,
+                    </Typography>
+                  </>
+                }
                 <Grid container spacing={3}>
-                  <Grid item xs={12} sm={6}>
-                    <List >
-                      <ListItem>
-                        <ListItemIcon>
-                          <ForwardIcon style={{ color: theme.palette.primary.dark }} />
-                        </ListItemIcon>
-                        <ListItemText style={{ fontFamily: "Roboto", fontWeight: "500", color: theme.palette.secondary.main }}>
-                          Javascript(ES5 & ES6)
-                        </ListItemText>
-                      </ListItem>
-                      <ListItem>
-                        <ListItemIcon>
-                          <ForwardIcon style={{ color: theme.palette.primary.dark }} />
-                        </ListItemIcon>
-                        <ListItemText style={{ fontFamily: "Roboto", fontWeight: "500", color: theme.palette.secondary.main }}>
-                          React
-                        </ListItemText>
-                      </ListItem>
-                      <ListItem>
-                        <ListItemIcon>
-                          <ForwardIcon style={{ color: theme.palette.primary.dark }} />
-                        </ListItemIcon>
-                        <ListItemText style={{ fontFamily: "Roboto", fontWeight: "500", color: theme.palette.secondary.main }}>
-                          Material-UI
-                        </ListItemText>
-                      </ListItem>
-                    </List>
-                  </Grid>
-                  <Grid item xs={12} sm={6}>
-                    <List >
-                      <ListItem>
-                        <ListItemIcon>
-                          <ForwardIcon style={{ color: theme.palette.primary.dark }} />
-                        </ListItemIcon>
-                        <ListItemText style={{ fontFamily: "Roboto", fontWeight: "500", color: theme.palette.secondary.main }}>
-                          HTML & CSS
-                        </ListItemText>
-                      </ListItem>
-                      <ListItem>
-                        <ListItemIcon>
-                          <ForwardIcon style={{ color: theme.palette.primary.dark }} />
-                        </ListItemIcon>
-                        <ListItemText style={{ fontFamily: "Roboto", fontWeight: "500", color: theme.palette.secondary.main }}>
-                          Node.js
-                        </ListItemText>
-                      </ListItem>
-                      <ListItem>
-                        <ListItemIcon>
-                          <ForwardIcon style={{ color: theme.palette.primary.dark }} />
-                        </ListItemIcon>
-                        <ListItemText style={{ fontFamily: "Roboto", fontWeight: "500", color: theme.palette.secondary.main }}>
-                          Material-UI
-                        </ListItemText>
-                      </ListItem>
-                    </List>
-                  </Grid>
+                  {isWidthUp("sm", width)
+                    ? <>
+                      <Grid item xs={12} sm={6}>
+                        <List >
+                          <ListItem>
+                            <ListItemIcon>
+                              <ForwardIcon style={{ color: theme.palette.primary.dark }} />
+                            </ListItemIcon>
+                            <ListItemText style={{ fontFamily: "Roboto", fontWeight: "500", color: theme.palette.secondary.main }}>
+                              Javascript(ES5 & ES6)
+                            </ListItemText>
+                          </ListItem>
+                          <ListItem>
+                            <ListItemIcon>
+                              <ForwardIcon style={{ color: theme.palette.primary.dark }} />
+                            </ListItemIcon>
+                            <ListItemText style={{ fontFamily: "Roboto", fontWeight: "500", color: theme.palette.secondary.main }}>
+                              React
+                            </ListItemText>
+                          </ListItem>
+                          <ListItem>
+                            <ListItemIcon>
+                              <ForwardIcon style={{ color: theme.palette.primary.dark }} />
+                            </ListItemIcon>
+                            <ListItemText style={{ fontFamily: "Roboto", fontWeight: "500", color: theme.palette.secondary.main }}>
+                              Material-UI
+                            </ListItemText>
+                          </ListItem>
+                        </List>
+                      </Grid>
+                      <Grid item xs={12} sm={6}>
+                        <List >
+                          <ListItem>
+                            <ListItemIcon>
+                              <ForwardIcon style={{ color: theme.palette.primary.dark }} />
+                            </ListItemIcon>
+                            <ListItemText style={{ fontFamily: "Roboto", fontWeight: "500", color: theme.palette.secondary.main }}>
+                              HTML & CSS
+                            </ListItemText>
+                          </ListItem>
+                          <ListItem>
+                            <ListItemIcon>
+                              <ForwardIcon style={{ color: theme.palette.primary.dark }} />
+                            </ListItemIcon>
+                            <ListItemText style={{ fontFamily: "Roboto", fontWeight: "500", color: theme.palette.secondary.main }}>
+                              Node.js
+                            </ListItemText>
+                          </ListItem>
+                          <ListItem>
+                            <ListItemIcon>
+                              <ForwardIcon style={{ color: theme.palette.primary.dark }} />
+                            </ListItemIcon>
+                            <ListItemText style={{ fontFamily: "Roboto", fontWeight: "500", color: theme.palette.secondary.main }}>
+                              Material-UI
+                            </ListItemText>
+                          </ListItem>
+                        </List>
+                      </Grid>
+                    </>
+                    : <Grid item xs>
+                      <List >
+                        <ListItem>
+                          <ListItemIcon>
+                            <ForwardIcon style={{ color: theme.palette.primary.dark }} />
+                          </ListItemIcon>
+                          <ListItemText style={{ fontFamily: "Roboto", fontWeight: "500", color: theme.palette.secondary.main }}>
+                            Javascript(ES5 & ES6)
+                          </ListItemText>
+                        </ListItem>
+                        <ListItem>
+                          <ListItemIcon>
+                            <ForwardIcon style={{ color: theme.palette.primary.dark }} />
+                          </ListItemIcon>
+                          <ListItemText style={{ fontFamily: "Roboto", fontWeight: "500", color: theme.palette.secondary.main }}>
+                            React
+                          </ListItemText>
+                        </ListItem>
+                        <ListItem>
+                          <ListItemIcon>
+                            <ForwardIcon style={{ color: theme.palette.primary.dark }} />
+                          </ListItemIcon>
+                          <ListItemText style={{ fontFamily: "Roboto", fontWeight: "500", color: theme.palette.secondary.main }}>
+                            Material-UI
+                          </ListItemText>
+                        </ListItem>
+                        <ListItem>
+                          <ListItemIcon>
+                            <ForwardIcon style={{ color: theme.palette.primary.dark }} />
+                          </ListItemIcon>
+                          <ListItemText style={{ fontFamily: "Roboto", fontWeight: "500", color: theme.palette.secondary.main }}>
+                            HTML & CSS
+                          </ListItemText>
+                        </ListItem>
+                        <ListItem>
+                          <ListItemIcon>
+                            <ForwardIcon style={{ color: theme.palette.primary.dark }} />
+                          </ListItemIcon>
+                          <ListItemText style={{ fontFamily: "Roboto", fontWeight: "500", color: theme.palette.secondary.main }}>
+                            Node.js
+                          </ListItemText>
+                        </ListItem>
+                        <ListItem>
+                          <ListItemIcon>
+                            <ForwardIcon style={{ color: theme.palette.primary.dark }} />
+                          </ListItemIcon>
+                          <ListItemText style={{ fontFamily: "Roboto", fontWeight: "500", color: theme.palette.secondary.main }}>
+                            Material-UI
+                          </ListItemText>
+                        </ListItem>
+                      </List>
+                    </Grid>
+                  }
                 </Grid>
               </Grid>
-              <Grid item xs={12} sm={4}>
-                <img
-                  src={
-                    url == "http://localhost:3000/"
-                      ? "/images/profile.jpg"
-                      : "https://weinianlim.github.io/wcc2/images/profile.jpg"
-                  }
-                  style={{ marginTop: "50px", borderRadius: "10px", width: "100%", height: "auto", maxWidth: "250px", marginLeft: "auto", marginRight: "auto" }}
-                />
-              </Grid>
+              {isWidthUp("sm", width)
+                ? <Grid item xs={12} sm={4}>
+                  <img
+                    src={
+                      url == "http://localhost:3000/"
+                        ? "/images/profile.jpg"
+                        : "https://weinianlim.github.io/wcc2/images/profile.jpg"
+                    }
+                    style={{ marginTop: "50px", borderRadius: "10px", width: "100%", height: "auto", maxWidth: "250px", marginLeft: "auto", marginRight: "auto" }}
+                  />
+                </Grid>
+                : <Grid item xs={12} sm={4} alignItems="center" container>
+                  <img
+                    src={
+                      url == "http://localhost:3000/"
+                        ? "/images/profile.jpg"
+                        : "https://weinianlim.github.io/wcc2/images/profile.jpg"
+                    }
+                    style={{ marginTop: "50px", borderRadius: "10px", width: "100%", height: "auto", maxWidth: "250px", marginLeft: "auto", marginRight: "auto" }}
+                  />
+                </Grid>
+              }
             </Grid>
           </section>
           <section id="experience" style={{ marginTop: "100px", paddingTop: "100px" }}>
@@ -351,7 +526,7 @@ class App extends Component {
               Places I've worked
             </Typography>
             <Divider variant="inset" className={classes.divider} style={{ marginBottom: "50px" }} />
-            <Grid container spacing={8}>
+            <Grid container spacing={4}>
               <Grid item xs={12} md={6}>
                 <Typography variant="h6" style={{ marginTop: "10px", fontFamily: "Roboto", fontWeight: "500", color: theme.palette.secondary.light }}>
                   Full Stack Developer @ Porton Health Corp
@@ -454,9 +629,14 @@ class App extends Component {
               alignItems="center"
             >
               <Grid item>
-                <Typography variant="h2" style={{ marginTop: "10px", textAlign: "center", fontFamily: "Roboto", fontWeight: "500", color: theme.palette.primary.light }}>
-                  Let's Get In Touch!
-                </Typography>
+                {isWidthUp("sm", width)
+                  ? <Typography variant="h2" style={{ marginTop: "10px", textAlign: "center", fontFamily: "Roboto", fontWeight: "500", color: theme.palette.primary.light }}>
+                    Let's Get In Touch!
+                    </Typography>
+                  : <Typography variant="h3" style={{ marginTop: "10px", textAlign: "center", fontFamily: "Roboto", fontWeight: "500", color: theme.palette.primary.light }}>
+                    Let's Get In Touch!
+                    </Typography>
+                }
               </Grid>
               <Grid item>
                 <Divider variant="inset" className={classes.divider} />
@@ -476,18 +656,41 @@ class App extends Component {
                   }}
                   color="theme.palette.primary.main"
                   style={{ marginTop: "50px", marginLeft: "0px" }}
+                  href="mailto:weinianlim26@gmail.com"
                 >
                   Say Hi
                 </Button>
               </Grid>
             </Grid>
           </section>
-          <section style={{ textAlign: "center" }}>
-            <Typography variant="subtitle1" style={{ marginTop: "180px", paddingBottom: "20px", fontFamily: "Roboto", fontWeight: "400", color: theme.palette.secondary.light }}>
-              Designed and built by William Lim
-            </Typography>
-          </section>
         </main>
+        <section style={{ marginTop: "180px", paddingTop: "25px", paddingBottom: "25px", textAlign: "center", boxShadow: "inset -1px 11px 8px -12px rgba(32,77,75,1)"}} >
+          <Grid
+            container
+            direction="row"
+            justify="center"
+            alignItems="center"
+          >
+            <Grid item>
+              <Button href="mailto:weinianlim26@gmail.com">
+                <i class="im im-mail" style={{ color: theme.palette.secondary.light }}/>
+              </Button>
+            </Grid>
+            <Grid item>
+              <Button href="https://www.linkedin.com/in/williamwnl/" target="_blank">
+                <i class="im im-linkedin" style={{ color: theme.palette.secondary.light }}/>
+              </Button>
+            </Grid>
+            <Grid item>
+              <Button href="https://github.com/WeiNianLim" target="_blank">
+                <i class="im im-github" style={{ color: theme.palette.secondary.light }}/>
+              </Button>
+            </Grid>
+          </Grid>
+          <Typography variant="subtitle1" style={{fontFamily: "Roboto", fontWeight: "400", color: theme.palette.secondary.light }}>
+            Designed and built by William Lim
+          </Typography>
+        </section>
       </div>
     )
   }
