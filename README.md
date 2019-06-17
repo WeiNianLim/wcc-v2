@@ -11,7 +11,7 @@
     ```
     npm install
     ```
-4. `cd` into the project folder and run
+4. Change your directory into the project folder `cd <projec folder name>` and run
     ```
     npm start
     ```
