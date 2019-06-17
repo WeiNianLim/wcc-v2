@@ -166,17 +166,17 @@ class App extends Component {
                   href="#landing"
                   className={classes.anchorTag}
                 >
-                  <img 
+                  <img
                     src=
                     {
-                      url === "http://localhost:3000/"
-                      ? "/images/logo.png"
-                      : "https://weinianlim.github.io/wcc2/images/logo.png"
+                      url.includes("http://localhost:3000/")
+                        ? "/images/logo.png"
+                        : "https://weinianlim.github.io/wcc2/images/logo.png"
                     }
                     style={{
                       width: "auto",
                       maxHeight: "45px"
-                    }} 
+                    }}
                   />
                 </a>
                 <div className={classes.grow}></div>
@@ -200,12 +200,16 @@ class App extends Component {
                 >
                   Experience
                 </Button>
-                {/* <a
+                <Button
+                  className={classes.button}
+                  classes={{
+                    root: classes.buttonRoot,
+                    label: classes.buttonLabel
+                  }}
                   href="#work"
-                  className={classes.anchorTag}
                 >
                   Work
-                </a> */}
+                </Button>
                 <Button
                   className={classes.button}
                   classes={{
@@ -223,7 +227,7 @@ class App extends Component {
                     label: classes.buttonLabel
                   }}
                   href={
-                    url == "http://localhost:3000/"
+                    url.includes("http://localhost:3000/")
                       ? "/images/resume.pdf"
                       : "https://weinianlim.github.io/wcc2/images/resume.pdf"
                   }
@@ -236,7 +240,7 @@ class App extends Component {
                 <Toolbar>
                   <img
                     src={
-                      url === "http://localhost:3000/"
+                      url.includes("http://localhost:3000/")
                         ? "/images/logo.png"
                         : "https://weinianlim.github.io/wcc2/images/logo.png"
                     }
@@ -280,12 +284,19 @@ class App extends Component {
                 Experience
               </Button>
             </ListItem>
-            {/* <ListItem><a
-                  href="#work"
-                  className={classes.anchorTag}
-                >
-                  Work
-                </a></ListItem> */}
+            <ListItem>
+              <Button
+                className={classes.button}
+                classes={{
+                  root: classes.drawerButtonRoot,
+                  label: classes.buttonLabel
+                }}
+                href="#work"
+                onClick={this.handleDrawerClose}
+              >
+                Work
+              </Button>
+            </ListItem>
             <ListItem>
               <Button
                 className={classes.button}
@@ -307,7 +318,7 @@ class App extends Component {
                   label: classes.buttonLabel
                 }}
                 href={
-                  url == "http://localhost:3000/"
+                  url.includes("http://localhost:3000/")
                     ? "/images/resume.pdf"
                     : "https://weinianlim.github.io/wcc2/images/resume.pdf"
                 }
@@ -327,7 +338,7 @@ class App extends Component {
                   William Lim
                   </Typography>
                 <Typography variant="h1" style={{ marginTop: "10px", fontFamily: "Roboto", fontWeight: "450", color: theme.palette.secondary.light }}>
-                  I build things for the internet
+                  I build things for the Internet
                   </Typography>
                 <Typography variant="h6" style={{ marginTop: "50px", fontFamily: "Roboto", fontWeight: "400", color: theme.palette.secondary.main }}>
                   I am a software engineer based in Vancouver, BC specializing in <br /> building exceptional, responsive and high quality <br /> Websites and Web Applications
@@ -342,7 +353,7 @@ class App extends Component {
                   </Typography>
                 <Typography variant="h6" style={{ marginTop: "50px", fontFamily: "Roboto", fontWeight: "400", color: theme.palette.secondary.main }}>
                   I am a software engineer based in Vancouver, BC specializing in building exceptional, responsive and high quality websites and web applications
-                  </Typography>
+                </Typography>
               </>
             }
             <Button
@@ -359,7 +370,7 @@ class App extends Component {
               Let's talk
             </Button>
           </section>
-          <section id="aboutMe" style={{ marginTop: "100px", paddingTop: "100px" }}>
+          <section id="aboutMe" style={{ margin: "100px auto 0 auto", paddingTop: "100px", maxWidth: "1000px" }}>
             <Typography variant="h4" style={{ marginTop: "10px", fontFamily: "Roboto", fontWeight: "500", color: theme.palette.secondary.light }}>
               About Me
             </Typography>
@@ -515,29 +526,29 @@ class App extends Component {
                 ? <Grid item xs={12} sm={4}>
                   <img
                     src={
-                      url == "http://localhost:3000/"
+                      url.includes("http://localhost:3000/")
                         ? "/images/profile.jpg"
                         : "https://weinianlim.github.io/wcc2/images/profile.jpg"
                     }
-                    style={{ marginTop: "50px", borderRadius: "10px", width: "100%", height: "auto", maxWidth: "250px", marginLeft: "auto", marginRight: "auto" }}
+                    style={{ margin: "50px auto 0 auto", borderRadius: "10px", width: "100%", height: "auto", maxWidth: "250px", display: "block"}}
                   />
                 </Grid>
                 : <Grid item xs={12} sm={4} alignItems="center" container>
                   <img
                     src={
-                      url == "http://localhost:3000/"
+                      url.includes("http://localhost:3000/")
                         ? "/images/profile.jpg"
                         : "https://weinianlim.github.io/wcc2/images/profile.jpg"
                     }
-                    style={{ marginTop: "50px", borderRadius: "10px", width: "100%", height: "auto", maxWidth: "250px", marginLeft: "auto", marginRight: "auto" }}
+                    style={{ margin: "50px auto 0 auto", borderRadius: "10px", width: "100%", height: "auto", maxWidth: "250px", display: "block"}}
                   />
                 </Grid>
               }
             </Grid>
           </section>
-          <section id="experience" style={{ marginTop: "100px", paddingTop: "100px" }}>
+          <section id="experience" style={{ marginTop: "100px", paddingTop: "100px", paddingBottom: "70px", marginBottom: "50px" }}>
             <Typography variant="h4" style={{ marginTop: "10px", fontFamily: "Roboto", fontWeight: "500", color: theme.palette.secondary.light }}>
-              Places I've worked
+              Places I've worked at
             </Typography>
             <Divider variant="inset" className={classes.divider} style={{ marginBottom: "50px" }} />
             <Grid container spacing={4}>
@@ -629,12 +640,81 @@ class App extends Component {
               </Grid>
             </Grid>
           </section>
-          {/* <section style={{ marginTop: "200px" }}>
+          <section id="work" style={{ margin: "50px auto 0 auto", paddingTop: "30px", maxWidth: "1000px" }}>
             <Typography variant="h4" style={{ marginTop: "10px", fontFamily: "Roboto", fontWeight: "500", color: theme.palette.secondary.light }}>
-              Few of my work
+              A Glance At My Projects
             </Typography>
-            <Divider variant="inset" className={classes.divider} style={{marginBottom: "50px"}}/>
-          </section> */}
+            <Divider variant="inset" className={classes.divider} style={{ marginBottom: "50px" }} />
+            <Grid container spacing={4}>
+              <Grid item xs={12} sm={5}>
+                <img
+                  src={
+                    url.includes("http://localhost:3000/")
+                      ? "/images/wa.png"
+                      : "https://weinianlim.github.io/wcc2/images/wa.png"
+                  }
+                  style={{ margin: "50px auto 0 auto", width: "100%", height: "auto", maxWidth: "250px", display: "block"}}
+                />
+              </Grid>
+              <Grid item xs={12} sm={7}>
+                <Typography variant="h5" style={{ marginTop: "10px", fontFamily: "Roboto", fontWeight: "500", color: theme.palette.secondary.light }}>
+                  Enjoy My Food
+                </Typography>
+                <Typography variant="h6" style={{ marginTop: "20px", fontFamily: "Roboto", fontWeight: "400", color: theme.palette.secondary.main }}>
+                  A web app built with React, Node.js,
+                  Express and MongoDB, a platform
+                  where people can sell their food
+                  products
+                </Typography>
+              </Grid>
+              {isWidthUp("sm", width)
+                ? <>
+                    <Grid item xs={12} sm={7}>
+                      <Typography variant="h5" style={{ marginTop: "10px", fontFamily: "Roboto", fontWeight: "500", color: theme.palette.secondary.light }}>
+                        Fun Math
+                        </Typography>
+                      <Typography variant="h6" style={{ marginTop: "20px", fontFamily: "Roboto", fontWeight: "400", color: theme.palette.secondary.main }}>
+                        An android app built with AndEngine, an
+                        education app that teaches kids to count
+                        better
+                        </Typography>
+                    </Grid>
+                    <Grid item xs={12} sm={5}>
+                      <img
+                        src={
+                          url.includes("http://localhost:3000/")
+                            ? "/images/ma.png"
+                            : "https://weinianlim.github.io/wcc2/images/ma.png"
+                        }
+                        style={{ margin: "50px auto 0 auto", width: "100%", height: "auto", maxWidth: "250px", display: "block"}}
+                      />
+                    </Grid>
+                  </>
+                : <>
+                    <Grid item xs={12} sm={5}>
+                      <img
+                        src={
+                          url.includes("http://localhost:3000/")
+                            ? "/images/ma.png"
+                            : "https://weinianlim.github.io/wcc2/images/ma.png"
+                        }
+                        style={{ margin: "50px auto 0 auto", width: "100%", height: "auto", maxWidth: "250px", display: "block"}}
+                      />
+                    </Grid>
+                    <Grid item xs={12} sm={7}>
+                      <Typography variant="h5" style={{ marginTop: "10px", fontFamily: "Roboto", fontWeight: "500", color: theme.palette.secondary.light }}>
+                        Fun Math
+                      </Typography>
+                      <Typography variant="h6" style={{ marginTop: "20px", fontFamily: "Roboto", fontWeight: "400", color: theme.palette.secondary.main }}>
+                        An Android App built with AndEngine, an
+                        education app that teaches kids to count
+                        better
+                      </Typography>
+                    </Grid>
+                  </>
+              }
+            </Grid>
+          </section>
           <section id="contact" style={{ marginTop: "100px", paddingTop: "100px" }}>
             <Grid
               container
@@ -678,7 +758,7 @@ class App extends Component {
             </Grid>
           </section>
         </main>
-        <section style={{ marginTop: "180px", paddingTop: "25px", paddingBottom: "25px", textAlign: "center", boxShadow: "inset -1px 11px 8px -12px rgba(32,77,75,1)"}} >
+        <section style={{ marginTop: "180px", paddingTop: "25px", paddingBottom: "25px", textAlign: "center", boxShadow: "inset -1px 11px 8px -12px rgba(32,77,75,1)" }} >
           <Grid
             container
             direction="row"
@@ -687,21 +767,21 @@ class App extends Component {
           >
             <Grid item>
               <Button href="mailto:weinianlim26@gmail.com">
-                <i class="im im-mail" style={{ color: theme.palette.secondary.light }}/>
+                <i class="im im-mail" style={{ color: theme.palette.secondary.light }} />
               </Button>
             </Grid>
             <Grid item>
               <Button href="https://www.linkedin.com/in/williamwnl/" target="_blank">
-                <i class="im im-linkedin" style={{ color: theme.palette.secondary.light }}/>
+                <i class="im im-linkedin" style={{ color: theme.palette.secondary.light }} />
               </Button>
             </Grid>
             <Grid item>
               <Button href="https://github.com/WeiNianLim" target="_blank">
-                <i class="im im-github" style={{ color: theme.palette.secondary.light }}/>
+                <i class="im im-github" style={{ color: theme.palette.secondary.light }} />
               </Button>
             </Grid>
           </Grid>
-          <Typography variant="subtitle1" style={{marginTop: "5px",fontFamily: "Roboto", fontWeight: "400", color: theme.palette.secondary.light }}>
+          <Typography variant="subtitle1" style={{ marginTop: "5px", fontFamily: "Roboto", fontWeight: "400", color: theme.palette.secondary.light }}>
             Designed and built by William Lim
           </Typography>
         </section>
