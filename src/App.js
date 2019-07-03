@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -19,7 +18,6 @@ import useScrollTrigger from '@material-ui/core/useScrollTrigger';
 import ForwardIcon from "@material-ui/icons/NavigateNext";
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import Link from '@material-ui/core/Link';
 
 const styles = {
   appBar: {
@@ -332,30 +330,15 @@ class App extends Component {
         </Drawer>
         <main className={classes.main}>
           <section id="landing" style={{ paddingTop: "150px" }}>
-            {isWidthUp("sm", width)
-              ? <>
-                <Typography variant="h1" style={{ fontFamily: "Roboto", fontWeight: "500", color: theme.palette.primary.main }}>
-                  William Lim
-                  </Typography>
-                <Typography variant="h1" style={{ marginTop: "10px", fontFamily: "Roboto", fontWeight: "450", color: theme.palette.secondary.light }}>
-                  I build things for the Internet
-                  </Typography>
-                <Typography variant="h6" style={{ marginTop: "50px", fontFamily: "Roboto", fontWeight: "400", color: theme.palette.secondary.main }}>
-                  I am a software engineer based in Vancouver, BC specializing in <br /> building exceptional, responsive and high quality <br /> Websites and Web Applications
-                  </Typography>
-              </>
-              : <>
-                <Typography variant="h3" style={{ fontFamily: "Roboto", fontWeight: "500", color: theme.palette.primary.main }}>
-                  William Lim
-                  </Typography>
-                <Typography variant="h3" style={{ marginTop: "10px", fontFamily: "Roboto", fontWeight: "450", color: theme.palette.secondary.light }}>
-                  I build things for the internet
-                  </Typography>
-                <Typography variant="h6" style={{ marginTop: "50px", fontFamily: "Roboto", fontWeight: "400", color: theme.palette.secondary.main }}>
-                  I am a software engineer based in Vancouver, BC specializing in building exceptional, responsive and high quality websites and web applications
-                </Typography>
-              </>
-            }
+            <Typography variant={isWidthUp("sm", width) ? "h1" : "h3"} style={{ fontFamily: "Roboto", fontWeight: "500", color: theme.palette.primary.main }}>
+              William Lim
+              </Typography>
+            <Typography variant={isWidthUp("sm", width) ? "h1" : "h3"} style={{ marginTop: "10px", fontFamily: "Roboto", fontWeight: "450", color: theme.palette.secondary.light }}>
+              I build things for the Internet
+              </Typography>
+            <Typography variant="h6" style={{ marginTop: "50px", fontFamily: "Roboto", fontWeight: "400", color: theme.palette.secondary.main }}>
+              I am a software engineer based in Vancouver, BC specializing in {isWidthUp("sm", width) && <br />}building exceptional, responsive and high quality {isWidthUp("sm", width) && <br />}Websites and Web Applications
+            </Typography>
             <Button
               variant="outlined"
               className={classes.button}
@@ -377,36 +360,18 @@ class App extends Component {
             <Divider variant="inset" className={classes.divider} />
             <Grid container spacing={3}>
               <Grid item xs={12} sm={8}>
-                {isWidthUp("sm", width)
-                  ? <>
-                    <Typography variant="h6" style={{ marginTop: "50px", fontFamily: "Roboto", fontWeight: "400", color: theme.palette.secondary.main }}>
-                      Hi there, I'm William! I am a software engineer located in Vancouver, BC.<br />
-                      I enjoy building exceptional websites and web application that has <br />
-                      awesome user-interface.
-                    </Typography>
-                    <Typography variant="h6" style={{ marginTop: "20px", fontFamily: "Roboto", fontWeight: "400", color: theme.palette.secondary.main }}>
-                      I am currently a Full Stack Developer at Porton Health Corp, <br />
-                      a vancouver based startup that provides telehealth platform.
-                    </Typography>
-                    <Typography variant="h6" style={{ marginTop: "20px", fontFamily: "Roboto", fontWeight: "400", color: theme.palette.secondary.main }}>
-                      Here are some of the Technologies that I am working with daily,
-                    </Typography>
-                  </>
-                  : <>
-                    <Typography variant="h6" style={{ marginTop: "50px", fontFamily: "Roboto", fontWeight: "400", color: theme.palette.secondary.main }}>
-                      Hi there, I'm William! I am a software engineer located in Vancouver, BC.
-                      I enjoy building exceptional websites and web application that has
-                      awesome user-interface.
-                    </Typography>
-                    <Typography variant="h6" style={{ marginTop: "20px", fontFamily: "Roboto", fontWeight: "400", color: theme.palette.secondary.main }}>
-                      I am currently a Full Stack Developer at Porton Health Corp,
-                      a vancouver based startup that provides telehealth platform.
-                    </Typography>
-                    <Typography variant="h6" style={{ marginTop: "20px", fontFamily: "Roboto", fontWeight: "400", color: theme.palette.secondary.main }}>
-                      Here are some of the Technologies that I am working with daily,
-                    </Typography>
-                  </>
-                }
+                <Typography variant="h6" style={{ marginTop: "50px", fontFamily: "Roboto", fontWeight: "400", color: theme.palette.secondary.main }}>
+                  Hi there, I'm William! I am a software engineer located in Vancouver, BC.{isWidthUp("sm", width)  && <br />}
+                  I enjoy building exceptional websites and web application that has {isWidthUp("sm", width)  && <br />}
+                  awesome user-interface.
+                </Typography>
+                <Typography variant="h6" style={{ marginTop: "20px", fontFamily: "Roboto", fontWeight: "400", color: theme.palette.secondary.main }}>
+                  I am currently a Full Stack Developer at Porton Health Corp, {isWidthUp("sm", width)  && <br />}
+                  a vancouver based startup that provides telehealth platform.
+                </Typography>
+                <Typography variant="h6" style={{ marginTop: "20px", fontFamily: "Roboto", fontWeight: "400", color: theme.palette.secondary.main }}>
+                  Here are some of the Technologies that I am working with daily,
+                </Typography>
                 <Grid container spacing={3}>
                   {isWidthUp("sm", width)
                     ? <>
@@ -723,14 +688,9 @@ class App extends Component {
               alignItems="center"
             >
               <Grid item>
-                {isWidthUp("sm", width)
-                  ? <Typography variant="h2" style={{ marginTop: "10px", textAlign: "center", fontFamily: "Roboto", fontWeight: "500", color: theme.palette.primary.light }}>
-                    Let's Get In Touch!
-                    </Typography>
-                  : <Typography variant="h3" style={{ marginTop: "10px", textAlign: "center", fontFamily: "Roboto", fontWeight: "500", color: theme.palette.primary.light }}>
-                    Let's Get In Touch!
-                    </Typography>
-                }
+                <Typography variant={isWidthUp("sm", width) ? "h2" : "h3"} style={{ marginTop: "10px", textAlign: "center", fontFamily: "Roboto", fontWeight: "500", color: theme.palette.primary.light }}>
+                  Let's Get In Touch!
+                </Typography>
               </Grid>
               <Grid item>
                 <Divider variant="inset" className={classes.divider} />
