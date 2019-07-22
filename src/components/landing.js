@@ -64,8 +64,9 @@ class Landing extends Component{
           color="theme.palette.primary.main"
           style={{ marginTop: "50px", marginLeft: "0px", }}
           href="mailto:weinianlim26@gmail.com"
+          target="_blank"
         >
-          Let's talk
+          Let's talk 
         </Button>
       </section>
     )
