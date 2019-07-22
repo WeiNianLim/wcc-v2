@@ -146,7 +146,7 @@ class Work extends Component{
         </Grid>
         <Dialog
           fullWidth={true}
-          maxWidth={isWidthUp("sm", width) ? "md" : "sm"}
+          maxWidth={isWidthUp("sm", width) ? "md" : "xl"}
           open={this.state.openEMF}
           onClose={this.handleCloseDialog}
           scroll="paper"
@@ -166,7 +166,8 @@ class Work extends Component{
           </DialogContent>
         </Dialog>
         <Dialog
-          maxWidth="sm"
+          fullWidth={true}
+          maxWidth={isWidthUp("sm", width) ? "md" : "xl"}
           open={this.state.openFM}
           onClose={this.handleCloseDialog}
           scroll="paper"
