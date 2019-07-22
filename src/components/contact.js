@@ -82,6 +82,7 @@ class Contact extends Component{
               color="theme.palette.primary.main"
               style={{ marginTop: "50px", marginLeft: "0px" }}
               href="mailto:weinianlim26@gmail.com"
+              target="_blank"
             >
               Say Hi
             </Button>
