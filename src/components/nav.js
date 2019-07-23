@@ -210,16 +210,22 @@ class Nav extends Component{
               </Toolbar>
             ) : (
                 <Toolbar>
-                  <img
-                    src={
-                      url.includes("http://localhost:3000/")
-                        ? "/images/logo.png"
-                        : "https://weinianlim.github.io/wcc2/images/logo.png"
-                    }
-                    style={{
-                      width: "auto",
-                      maxHeight: "45px"
-                    }} />
+                  <a
+                  href="#landing"
+                  className={classes.anchorTag}
+                  >
+                    <img
+                      src={
+                        url.includes("http://localhost:3000/")
+                          ? "/images/logo.png"
+                          : "https://weinianlim.github.io/wcc2/images/logo.png"
+                      }
+                      style={{
+                        width: "auto",
+                        maxHeight: "45px"
+                      }} 
+                    />
+                  </a>
                   <div className={classes.grow}></div>
                   <IconButton className={classes.menuButton} onClick={this.handleDrawerOpen}>
                     <MenuIcon />
