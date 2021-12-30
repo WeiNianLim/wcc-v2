@@ -73,6 +73,7 @@ class Work extends Component{
           <Grid item xs={12} sm={5}>
             <Button onClick={() => this.handleOpenDialog("emf")}>
               <img
+                alt=""
                 src={
                   url.includes("http://localhost:3000/")
                     ? "/images/wa.png"
@@ -108,6 +109,7 @@ class Work extends Component{
                 <Grid item xs={12} sm={5}>
                   <Button onClick={() => this.handleOpenDialog("fm")}>
                     <img
+                      alt=""
                       src={
                         url.includes("http://localhost:3000/")
                           ? "/images/ma.png"
@@ -122,6 +124,7 @@ class Work extends Component{
                 <Grid item xs={12} sm={5}>
                   <Button onClick={() => this.handleOpenDialog("fm")}>
                     <img
+                      alt=""
                       src={
                         url.includes("http://localhost:3000/")
                           ? "/images/ma.png"
@@ -154,6 +157,7 @@ class Work extends Component{
           <DialogContent>
             {this.state.emfList.map(e =>
               <img
+                alt=""
                 src={
                   url.includes("http://localhost:3000/")
                     ? `/images/${e}.png`
@@ -175,6 +179,7 @@ class Work extends Component{
           <DialogContent>
             {this.state.fmList.map(e =>
               <img
+                alt=""
                 src={
                   url.includes("http://localhost:3000/")
                     ? `/images/${e}.png`

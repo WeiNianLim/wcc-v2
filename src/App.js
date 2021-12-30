@@ -1,7 +1,7 @@
-import React, { Component } from "react";
+import React from "react";
 import { withStyles } from "@material-ui/core/styles";
 import theme from './theme.js'
-import withWidth, { isWidthUp } from "@material-ui/core/withWidth";
+import withWidth from "@material-ui/core/withWidth";
 import Footer from './components/footer'
 import Contact from './components/contact'
 import Work from './components/work'
@@ -26,26 +26,20 @@ const styles = {
 }
 
 
-class App extends Component {
-
-  render() {
-
-    const { classes } = this.props;
-
-    return (
-      <div style={{ background: theme.palette.secondary.dark, margin: "0" }}>
-        <Nav/>
-        <main className={classes.main}>
-          <Landing/>
-          <About/>
-          <Experience/>
-          <Work/>
-          <Contact/>
-        </main>
-        <Footer/>
-      </div>
-    )
-  }
+const App = ({ classes }) => {
+  return (
+    <div style={{ background: theme.palette.secondary.dark, margin: "0" }}>
+      <Nav/>
+      <main className={classes.main}>
+        <Landing/>
+        <About/>
+        <Experience/>
+        <Work/>
+        <Contact/>
+      </main>
+      <Footer/>
+    </div>
+  )
 }
 
 export default withWidth()(withStyles(styles)(App))

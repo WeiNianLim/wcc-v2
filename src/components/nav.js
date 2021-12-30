@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { useEffect, useState } from "react";
 import { withStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -83,216 +83,103 @@ function HideOnScroll(props) {
   );
 }
 
-class Nav extends Component{
+const Nav = (props) => {
 
-  state = {
-    open: false,
-    backgroundShadow: "none",
-  }
+  const [open, setOpen] = useState(false)
+  const [backgroundShadow, setBackgroundShadow] = useState("none")
 
-  componentDidMount() {
-    window.addEventListener("scroll", this.handleScroll);
-  }
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+  }, [])
 
-  componentWillUnmount() {
-    window.removeEventListener("scroll", this.handleScroll);
-  }
+  useEffect(() => {
+    window.removeEventListener("scroll", handleScroll);
+  }, [])
 
-  handleDrawerOpen = () => {
-    this.setState({
-      open: true
-    });
+  const handleDrawerOpen = () => {
+    setOpen(true);
   };
 
-  handleDrawerClose = () => {
-    this.setState({
-      open: false
-    });
+  const handleDrawerClose = () => {
+    setOpen(false)
   };
 
-  handleScroll = event => {
-    if (window.pageYOffset > 200) {
-      this.setState({
-        backgroundShadow:
-          "inset 0px -7px 11px -10px rgba(32,77,75,1)",
-      });
-    } else {
-      this.setState({
-        backgroundShadow: "none"
-      });
-    }
+  const handleScroll = event => {
+    setBackgroundShadow(window.pageYOffset > 200 ? "inset 0px -7px 11px -10px rgba(32,77,75,1)" : "none");
   };
-  
-  render (){
 
-    const {classes, width} = this.props;
-    const url = window.location.href;
+  const {classes, width} = props;
+  const url = window.location.href;
 
-    return (
-      <>
-        <HideOnScroll {...this.props}>
-          <AppBar className={classes.appBar} style={{ boxShadow: this.state.backgroundShadow }}>
-            {isWidthUp("sm", width) ? (
-              <Toolbar>
-                <a
-                  href="#landing"
-                  className={classes.anchorTag}
-                >
-                  <img
-                    src=
-                    {
-                      url.includes("http://localhost:3000/")
-                        ? "/images/logo.png"
-                        : "https://williamlim26.github.io/wcc2/images/logo.png"
-                    }
-                    style={{
-                      width: "auto",
-                      maxHeight: "45px"
-                    }}
-                  />
-                </a>
-                <div className={classes.grow}></div>
-                <Button
-                  className={classes.button}
-                  classes={{
-                    root: classes.buttonRoot,
-                    label: classes.buttonLabel
-                  }}
-                  href="#aboutMe"
-                >
-                  About
-                </Button>
-                <Button
-                  className={classes.button}
-                  classes={{
-                    root: classes.buttonRoot,
-                    label: classes.buttonLabel
-                  }}
-                  href="#experience"
-                >
-                  Experience
-                </Button>
-                <Button
-                  className={classes.button}
-                  classes={{
-                    root: classes.buttonRoot,
-                    label: classes.buttonLabel
-                  }}
-                  href="#work"
-                >
-                  Work
-                </Button>
-                <Button
-                  className={classes.button}
-                  classes={{
-                    root: classes.buttonRoot,
-                    label: classes.buttonLabel
-                  }}
-                  href="#contact"
-                >
-                  Contact
-                </Button>
-                <Button
-                  className={classes.button}
-                  classes={{
-                    root: classes.buttonRoot,
-                    label: classes.buttonLabel
-                  }}
-                  href={
+  return (
+    <>
+      <HideOnScroll {...props}>
+        <AppBar className={classes.appBar} style={{ boxShadow: backgroundShadow }}>
+          {isWidthUp("sm", width) ? (
+            <Toolbar>
+              <a
+                href="#landing"
+                className={classes.anchorTag}
+              >
+                <img
+                  alt="William Lim Site's Logo"
+                  src=
+                  {
                     url.includes("http://localhost:3000/")
-                      ? "/images/resume.pdf"
-                      : "https://williamlim26.github.io/wcc2/images/resume.pdf"
+                      ? "/images/logo.png"
+                      : "https://williamlim26.github.io/wcc2/images/logo.png"
                   }
-                  target="_blank"
-                >
-                  Resume
-                </Button>
-              </Toolbar>
-            ) : (
-                <Toolbar>
-                  <a
-                  href="#landing"
-                  className={classes.anchorTag}
-                  >
-                    <img
-                      src={
-                        url.includes("http://localhost:3000/")
-                          ? "/images/logo.png"
-                          : "https://williamlim26.github.io/wcc2/images/logo.png"
-                      }
-                      style={{
-                        width: "auto",
-                        maxHeight: "45px"
-                      }} 
-                    />
-                  </a>
-                  <div className={classes.grow}></div>
-                  <IconButton className={classes.menuButton} onClick={this.handleDrawerOpen}>
-                    <MenuIcon />
-                  </IconButton>
-                </Toolbar>
-              )}
-          </AppBar>
-        </HideOnScroll>
-        <Drawer classes={{ root: classes.drawer }} open={this.state.open} onClose={this.handleDrawerClose} anchor='right'>
-          <List>
-            <ListItem>
+                  style={{
+                    width: "auto",
+                    maxHeight: "45px"
+                  }}
+                />
+              </a>
+              <div className={classes.grow}></div>
               <Button
                 className={classes.button}
                 classes={{
-                  root: classes.drawerButtonRoot,
+                  root: classes.buttonRoot,
                   label: classes.buttonLabel
                 }}
                 href="#aboutMe"
-                onClick={this.handleDrawerClose}
               >
                 About
               </Button>
-            </ListItem>
-            <ListItem>
               <Button
                 className={classes.button}
                 classes={{
-                  root: classes.drawerButtonRoot,
+                  root: classes.buttonRoot,
                   label: classes.buttonLabel
                 }}
                 href="#experience"
-                onClick={this.handleDrawerClose}
               >
                 Experience
               </Button>
-            </ListItem>
-            <ListItem>
               <Button
                 className={classes.button}
                 classes={{
-                  root: classes.drawerButtonRoot,
+                  root: classes.buttonRoot,
                   label: classes.buttonLabel
                 }}
                 href="#work"
-                onClick={this.handleDrawerClose}
               >
                 Work
               </Button>
-            </ListItem>
-            <ListItem>
               <Button
                 className={classes.button}
                 classes={{
-                  root: classes.drawerButtonRoot,
+                  root: classes.buttonRoot,
                   label: classes.buttonLabel
                 }}
                 href="#contact"
-                onClick={this.handleDrawerClose}
               >
                 Contact
               </Button>
-            </ListItem>
-            <ListItem>
               <Button
                 className={classes.button}
                 classes={{
-                  root: classes.drawerButtonRoot,
+                  root: classes.buttonRoot,
                   label: classes.buttonLabel
                 }}
                 href={
@@ -301,16 +188,113 @@ class Nav extends Component{
                     : "https://williamlim26.github.io/wcc2/images/resume.pdf"
                 }
                 target="_blank"
-                onClick={this.handleDrawerClose}
               >
                 Resume
               </Button>
-            </ListItem>
-          </List>
-        </Drawer>
-      </>
-    )
-  }
+            </Toolbar>
+          ) : (
+              <Toolbar>
+                <a
+                href="#landing"
+                className={classes.anchorTag}
+                >
+                  <img
+                    alt="William Lim Site's Logo"
+                    src={
+                      url.includes("http://localhost:3000/")
+                        ? "/images/logo.png"
+                        : "https://williamlim26.github.io/wcc2/images/logo.png"
+                    }
+                    style={{
+                      width: "auto",
+                      maxHeight: "45px"
+                    }} 
+                  />
+                </a>
+                <div className={classes.grow}></div>
+                <IconButton className={classes.menuButton} onClick={handleDrawerOpen}>
+                  <MenuIcon />
+                </IconButton>
+              </Toolbar>
+            )}
+        </AppBar>
+      </HideOnScroll>
+      <Drawer classes={{ root: classes.drawer }} open={open} onClose={handleDrawerClose} anchor='right'>
+        <List>
+          <ListItem>
+            <Button
+              className={classes.button}
+              classes={{
+                root: classes.drawerButtonRoot,
+                label: classes.buttonLabel
+              }}
+              href="#aboutMe"
+              onClick={handleDrawerClose}
+            >
+              About
+            </Button>
+          </ListItem>
+          <ListItem>
+            <Button
+              className={classes.button}
+              classes={{
+                root: classes.drawerButtonRoot,
+                label: classes.buttonLabel
+              }}
+              href="#experience"
+              onClick={handleDrawerClose}
+            >
+              Experience
+            </Button>
+          </ListItem>
+          <ListItem>
+            <Button
+              className={classes.button}
+              classes={{
+                root: classes.drawerButtonRoot,
+                label: classes.buttonLabel
+              }}
+              href="#work"
+              onClick={handleDrawerClose}
+            >
+              Work
+            </Button>
+          </ListItem>
+          <ListItem>
+            <Button
+              className={classes.button}
+              classes={{
+                root: classes.drawerButtonRoot,
+                label: classes.buttonLabel
+              }}
+              href="#contact"
+              onClick={handleDrawerClose}
+            >
+              Contact
+            </Button>
+          </ListItem>
+          <ListItem>
+            <Button
+              className={classes.button}
+              classes={{
+                root: classes.drawerButtonRoot,
+                label: classes.buttonLabel
+              }}
+              href={
+                url.includes("http://localhost:3000/")
+                  ? "/images/resume.pdf"
+                  : "https://williamlim26.github.io/wcc2/images/resume.pdf"
+              }
+              target="_blank"
+              onClick={handleDrawerClose}
+            >
+              Resume
+            </Button>
+          </ListItem>
+        </List>
+      </Drawer>
+    </>
+  )
 }
 
 export default withWidth()(withStyles(styles)(Nav))

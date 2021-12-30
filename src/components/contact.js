@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import theme from '../theme.js'
 import withWidth, { isWidthUp } from "@material-ui/core/withWidth";
 import Button from "@material-ui/core/Button";
@@ -44,53 +44,48 @@ const styles = {
   },
 }
 
-class Contact extends Component{
-  
-  render (){
+const Contact = ({classes, width}) => {
 
-    const {classes, width} = this.props;
-
-    return (
-      <section id="contact" style={{ marginTop: "100px", paddingTop: "100px" }}>
-        <Grid
-          container
-          direction="column"
-          justify="center"
-          alignItems="center"
-        >
-          <Grid item>
-            <Typography variant={isWidthUp("sm", width) ? "h2" : "h3"} style={{ marginTop: "10px", textAlign: "center", fontFamily: "Roboto", fontWeight: "500", color: theme.palette.primary.light }}>
-              Let's Get In Touch!
-            </Typography>
-          </Grid>
-          <Grid item>
-            <Divider variant="inset" className={classes.divider} />
-          </Grid>
-          <Grid item>
-            <Typography variant="h6" style={{ maxWidth: "700px", textAlign: "center", marginTop: "50px", fontFamily: "Roboto", fontWeight: "400", color: theme.palette.secondary.main }}>
-              I am currently looking for new existing opportunities, whether it is for a position or project or just to say hi, feel free to shoot me an email
-            </Typography>
-          </Grid>
-          <Grid item>
-            <Button
-              variant="outlined"
-              className={classes.button}
-              classes={{
-                root: classes.contactButtonRoot,
-                label: classes.buttonLabel
-              }}
-              color="theme.palette.primary.main"
-              style={{ marginTop: "50px", marginLeft: "0px" }}
-              href="mailto:weinianlim26@gmail.com"
-              target="_blank"
-            >
-              Say Hi
-            </Button>
-          </Grid>
+  return (
+    <section id="contact" style={{ marginTop: "100px", paddingTop: "100px" }}>
+      <Grid
+        container
+        direction="column"
+        justify="center"
+        alignItems="center"
+      >
+        <Grid item>
+          <Typography variant={isWidthUp("sm", width) ? "h2" : "h3"} style={{ marginTop: "10px", textAlign: "center", fontFamily: "Roboto", fontWeight: "500", color: theme.palette.primary.light }}>
+            Let's Get In Touch!
+          </Typography>
         </Grid>
-      </section>
-    )
-  }
+        <Grid item>
+          <Divider variant="inset" className={classes.divider} />
+        </Grid>
+        <Grid item>
+          <Typography variant="h6" style={{ maxWidth: "700px", textAlign: "center", marginTop: "50px", fontFamily: "Roboto", fontWeight: "400", color: theme.palette.secondary.main }}>
+            I am currently looking for new existing opportunities, whether it is for a position or project or just to say hi, feel free to shoot me an email
+          </Typography>
+        </Grid>
+        <Grid item>
+          <Button
+            variant="outlined"
+            className={classes.button}
+            classes={{
+              root: classes.contactButtonRoot,
+              label: classes.buttonLabel
+            }}
+            color="theme.palette.primary.main"
+            style={{ marginTop: "50px", marginLeft: "0px" }}
+            href="mailto:weinianlim26@gmail.com"
+            target="_blank"
+          >
+            Say Hi
+          </Button>
+        </Grid>
+      </Grid>
+    </section>
+  )
 }
 
 export default withWidth()(withStyles(styles)(Contact))
