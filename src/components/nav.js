@@ -143,7 +143,7 @@ class Nav extends Component{
                     {
                       url.includes("http://localhost:3000/")
                         ? "/images/logo.png"
-                        : "https://weinianlim.github.io/wcc2/images/logo.png"
+                        : "https://williamlim26.github.io/wcc2/images/logo.png"
                     }
                     style={{
                       width: "auto",
@@ -201,7 +201,7 @@ class Nav extends Component{
                   href={
                     url.includes("http://localhost:3000/")
                       ? "/images/resume.pdf"
-                      : "https://weinianlim.github.io/wcc2/images/resume.pdf"
+                      : "https://williamlim26.github.io/wcc2/images/resume.pdf"
                   }
                   target="_blank"
                 >
@@ -218,7 +218,7 @@ class Nav extends Component{
                       src={
                         url.includes("http://localhost:3000/")
                           ? "/images/logo.png"
-                          : "https://weinianlim.github.io/wcc2/images/logo.png"
+                          : "https://williamlim26.github.io/wcc2/images/logo.png"
                       }
                       style={{
                         width: "auto",
@@ -298,7 +298,7 @@ class Nav extends Component{
                 href={
                   url.includes("http://localhost:3000/")
                     ? "/images/resume.pdf"
-                    : "https://weinianlim.github.io/wcc2/images/resume.pdf"
+                    : "https://williamlim26.github.io/wcc2/images/resume.pdf"
                 }
                 target="_blank"
                 onClick={this.handleDrawerClose}

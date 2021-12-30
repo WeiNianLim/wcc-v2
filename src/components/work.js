@@ -76,7 +76,7 @@ class Work extends Component{
                 src={
                   url.includes("http://localhost:3000/")
                     ? "/images/wa.png"
-                    : "https://weinianlim.github.io/wcc2/images/wa.png"
+                    : "https://williamlim26.github.io/wcc2/images/wa.png"
                 }
                 style={{ margin: "50px auto 0 auto", width: "100%", height: "auto", maxWidth: "250px", display: "block"}}
               />
@@ -111,7 +111,7 @@ class Work extends Component{
                       src={
                         url.includes("http://localhost:3000/")
                           ? "/images/ma.png"
-                          : "https://weinianlim.github.io/wcc2/images/ma.png"
+                          : "https://williamlim26.github.io/wcc2/images/ma.png"
                       }
                       style={{ margin: "50px auto 0 auto", width: "100%", height: "auto", maxWidth: "250px", display: "block"}}
                     />
@@ -125,7 +125,7 @@ class Work extends Component{
                       src={
                         url.includes("http://localhost:3000/")
                           ? "/images/ma.png"
-                          : "https://weinianlim.github.io/wcc2/images/ma.png"
+                          : "https://williamlim26.github.io/wcc2/images/ma.png"
                       }
                       style={{ margin: "50px auto 0 auto", width: "100%", height: "auto", maxWidth: "250px", display: "block"}}
                     />
@@ -157,7 +157,7 @@ class Work extends Component{
                 src={
                   url.includes("http://localhost:3000/")
                     ? `/images/${e}.png`
-                    : `https://weinianlim.github.io/wcc2/images/${e}.png`
+                    : `https://williamlim26.github.io/wcc2/images/${e}.png`
                 }
                 style={{marginTop: "25px" ,marginBottom: "25px", width: "100%", height: "auto"}}
               />
@@ -178,7 +178,7 @@ class Work extends Component{
                 src={
                   url.includes("http://localhost:3000/")
                     ? `/images/${e}.png`
-                    : `https://weinianlim.github.io/wcc2/images/${e}.png`
+                    : `https://williamlim26.github.io/wcc2/images/${e}.png`
                 }
                 style={{marginTop: "25px" ,marginBottom: "25px", width: "100%", height: "auto"}}
               />

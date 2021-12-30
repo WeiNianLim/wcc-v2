@@ -181,7 +181,7 @@ class About extends Component{
                 src={
                   url.includes("http://localhost:3000/")
                     ? "/images/profile.jpg"
-                    : "https://weinianlim.github.io/wcc2/images/profile.jpg"
+                    : "https://williamlim26.github.io/wcc2/images/profile.jpg"
                 }
                 style={{ margin: "50px auto 0 auto", borderRadius: "10px", width: "100%", height: "auto", maxWidth: "250px", display: "block"}}
               />
@@ -191,7 +191,7 @@ class About extends Component{
                 src={
                   url.includes("http://localhost:3000/")
                     ? "/images/profile.jpg"
-                    : "https://weinianlim.github.io/wcc2/images/profile.jpg"
+                    : "https://williamlim26.github.io/wcc2/images/profile.jpg"
                 }
                 style={{ margin: "50px auto 0 auto", borderRadius: "10px", width: "100%", height: "auto", maxWidth: "250px", display: "block"}}
               />

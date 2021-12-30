@@ -25,7 +25,7 @@ class Footer extends Component{
             </Button>
           </Grid>
           <Grid item>
-            <Button href="https://github.com/WeiNianLim" target="_blank">
+            <Button href="https://github.com/williamlim26" target="_blank">
               <i class="im im-github" style={{ color: theme.palette.secondary.light }} />
             </Button>
           </Grid>

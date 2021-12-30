@@ -6,7 +6,7 @@
 2. Clone wcc2 to your local
 
     ```
-    git clone https://github.com/WeiNianLim/wcc2.git
+    git clone https://github.com/williamlim26/wcc2.git
     ```
 3. Install all the dependencies 
 
