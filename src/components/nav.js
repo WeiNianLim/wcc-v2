@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { withStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -12,6 +12,7 @@ import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import Slide from '@material-ui/core/Slide';
 import useScrollTrigger from '@material-ui/core/useScrollTrigger';
+import { AppContext } from '../AppContext'
 
 const styles = {
   appBar: {
@@ -84,6 +85,7 @@ function HideOnScroll(props) {
 }
 
 const Nav = (props) => {
+  const { assetUrl } = useContext(AppContext)
 
   const [open, setOpen] = useState(false)
   const [backgroundShadow, setBackgroundShadow] = useState("none")
@@ -92,7 +94,7 @@ const Nav = (props) => {
     window.addEventListener("scroll", handleScroll);
   }, [])
 
-  useEffect(() => {
+  useEffect(() => () => {
     window.removeEventListener("scroll", handleScroll);
   }, [])
 
@@ -109,7 +111,6 @@ const Nav = (props) => {
   };
 
   const {classes, width} = props;
-  const url = window.location.href;
 
   return (
     <>
@@ -123,12 +124,7 @@ const Nav = (props) => {
               >
                 <img
                   alt="William Lim Site's Logo"
-                  src=
-                  {
-                    url.includes("http://localhost:3000/")
-                      ? "/images/logo.png"
-                      : "https://williamlim26.github.io/wcc2/images/logo.png"
-                  }
+                  src= {`${assetUrl}/images/logo.png`}
                   style={{
                     width: "auto",
                     maxHeight: "45px"
@@ -182,11 +178,7 @@ const Nav = (props) => {
                   root: classes.buttonRoot,
                   label: classes.buttonLabel
                 }}
-                href={
-                  url.includes("http://localhost:3000/")
-                    ? "/images/resume.pdf"
-                    : "https://williamlim26.github.io/wcc2/images/resume.pdf"
-                }
+                href={`${assetUrl}/images/resume.pdf`}
                 target="_blank"
               >
                 Resume
@@ -200,11 +192,7 @@ const Nav = (props) => {
                 >
                   <img
                     alt="William Lim Site's Logo"
-                    src={
-                      url.includes("http://localhost:3000/")
-                        ? "/images/logo.png"
-                        : "https://williamlim26.github.io/wcc2/images/logo.png"
-                    }
+                    src={`${assetUrl}/images/logo.png`}
                     style={{
                       width: "auto",
                       maxHeight: "45px"
@@ -280,11 +268,7 @@ const Nav = (props) => {
                 root: classes.drawerButtonRoot,
                 label: classes.buttonLabel
               }}
-              href={
-                url.includes("http://localhost:3000/")
-                  ? "/images/resume.pdf"
-                  : "https://williamlim26.github.io/wcc2/images/resume.pdf"
-              }
+              href={`${assetUrl}/images/resume.pdf`}
               target="_blank"
               onClick={handleDrawerClose}
             >

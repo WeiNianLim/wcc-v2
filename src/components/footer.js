@@ -1,10 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
 import theme from '../theme.js'
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import Grid from '@material-ui/core/Grid';
+import { AppContext } from '../AppContext';
 
 const Footer = () => {
+  const { EMAIL, GITHUB, LINKEDIN } = useContext(AppContext);
+
   return (
     <section style={{ marginTop: "180px", paddingTop: "25px", paddingBottom: "25px", textAlign: "center", boxShadow: "inset -1px 11px 8px -12px rgba(32,77,75,1)" }} >
       <Grid
@@ -14,17 +17,17 @@ const Footer = () => {
         alignItems="center"
       >
         <Grid item>
-          <Button href="mailto:weinianlim26@gmail.com">
+          <Button href={`mailto:${EMAIL}`}>
             <i class="im im-mail" style={{ color: theme.palette.secondary.light }} />
           </Button>
         </Grid>
         <Grid item>
-          <Button href="https://www.linkedin.com/in/williamwnl/" target="_blank">
+          <Button href={LINKEDIN} target="_blank">
             <i class="im im-linkedin" style={{ color: theme.palette.secondary.light }} />
           </Button>
         </Grid>
         <Grid item>
-          <Button href="https://github.com/williamlim26" target="_blank">
+          <Button href={GITHUB} target="_blank">
             <i class="im im-github" style={{ color: theme.palette.secondary.light }} />
           </Button>
         </Grid>

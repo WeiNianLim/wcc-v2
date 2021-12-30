@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import { withStyles } from "@material-ui/core/styles";
 import theme from '../theme.js'
 import withWidth, { isWidthUp } from "@material-ui/core/withWidth";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
+import { AppContext } from '../AppContext';
 
 const styles = {
   contactButtonRoot: {
@@ -37,6 +38,8 @@ const styles = {
 }
 
 const Landing = ({ classes, width }) => {
+  const { EMAIL } = useContext(AppContext);
+
   return (
     <section id="landing" style={{ paddingTop: "150px" }}>
       <Typography variant={isWidthUp("sm", width) ? "h1" : "h3"} style={{ fontFamily: "Roboto", fontWeight: "500", color: theme.palette.primary.main }}>
@@ -46,7 +49,7 @@ const Landing = ({ classes, width }) => {
         I build things for the Internet
         </Typography>
       <Typography variant="h6" style={{ marginTop: "50px", fontFamily: "Roboto", fontWeight: "400", color: theme.palette.secondary.main }}>
-        I am a software engineer based in Vancouver, BC specializing in {isWidthUp("sm", width) && <br />}building exceptional, responsive and high quality {isWidthUp("sm", width) && <br />}Websites and Web Applications
+        I am a software developer based in Kelowna, BC specializing in {isWidthUp("sm", width) && <br />}building exceptional, responsive and high quality {isWidthUp("sm", width) && <br />}Websites and Web Applications
       </Typography>
       <Button
         variant="outlined"
@@ -57,7 +60,7 @@ const Landing = ({ classes, width }) => {
         }}
         color="theme.palette.primary.main"
         style={{ marginTop: "50px", marginLeft: "0px", }}
-        href="mailto:weinianlim26@gmail.com"
+        href={`mailto:${EMAIL}`}
         target="_blank"
       >
         Let's talk 

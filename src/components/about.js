@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { withStyles } from "@material-ui/core/styles";
 import theme from '../theme.js'
 import withWidth, { isWidthUp } from "@material-ui/core/withWidth";
@@ -10,6 +10,7 @@ import Divider from "@material-ui/core/Divider";
 import ForwardIcon from "@material-ui/icons/NavigateNext";
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
+import { AppContext } from '../AppContext';
 
 
 const styles = {
@@ -34,8 +35,7 @@ const styles = {
 }
 
 const About = ({classes, width}) => {
-  
-  const url = window.location.href;
+  const { assetUrl } = useContext(AppContext)
 
   return (
     <section id="aboutMe" style={{ margin: "100px auto 0 auto", paddingTop: "100px", maxWidth: "1000px" }}>
@@ -46,13 +46,13 @@ const About = ({classes, width}) => {
       <Grid container spacing={3}>
         <Grid item xs={12} sm={8}>
           <Typography variant="h6" style={{ marginTop: "50px", fontFamily: "Roboto", fontWeight: "400", color: theme.palette.secondary.main }}>
-            Hi there, I'm William! I am a software engineer located in Kelowna, BC.{isWidthUp("sm", width)  && <br />}
+            Hi there, I'm William! I am a software developer located in Kelowna, BC.{isWidthUp("sm", width)  && <br />}
             I enjoy building exceptional websites and web application that has {isWidthUp("sm", width)  && <br />}
             awesome user-interface.
           </Typography>
           <Typography variant="h6" style={{ marginTop: "20px", fontFamily: "Roboto", fontWeight: "400", color: theme.palette.secondary.main }}>
-            I am currently a Full Stack Developer at Porton Health Corp, {isWidthUp("sm", width)  && <br />}
-            a vancouver based startup that provides telehealth platform.
+            I am currently an Intermediate Software Developer at Acro Media Inc, {isWidthUp("sm", width)  && <br />}
+            an ecommerce company building tailored solutions to help companies in building, optimizing scalable digital business.
           </Typography>
           <Typography variant="h6" style={{ marginTop: "20px", fontFamily: "Roboto", fontWeight: "400", color: theme.palette.secondary.main }}>
             Here are some of the Technologies that I am working with daily,
@@ -83,7 +83,7 @@ const About = ({classes, width}) => {
                         <ForwardIcon style={{ color: theme.palette.primary.dark }} />
                       </ListItemIcon>
                       <ListItemText style={{ fontFamily: "Roboto", fontWeight: "500", color: theme.palette.secondary.main }}>
-                        Material-UI
+                        Drupal 8
                       </ListItemText>
                     </ListItem>
                   </List>
@@ -95,7 +95,7 @@ const About = ({classes, width}) => {
                         <ForwardIcon style={{ color: theme.palette.primary.dark }} />
                       </ListItemIcon>
                       <ListItemText style={{ fontFamily: "Roboto", fontWeight: "500", color: theme.palette.secondary.main }}>
-                        HTML & CSS
+                        PHP
                       </ListItemText>
                     </ListItem>
                     <ListItem>
@@ -103,7 +103,7 @@ const About = ({classes, width}) => {
                         <ForwardIcon style={{ color: theme.palette.primary.dark }} />
                       </ListItemIcon>
                       <ListItemText style={{ fontFamily: "Roboto", fontWeight: "500", color: theme.palette.secondary.main }}>
-                        Node.js
+                        Bootstrap
                       </ListItemText>
                     </ListItem>
                     <ListItem>
@@ -111,7 +111,7 @@ const About = ({classes, width}) => {
                         <ForwardIcon style={{ color: theme.palette.primary.dark }} />
                       </ListItemIcon>
                       <ListItemText style={{ fontFamily: "Roboto", fontWeight: "500", color: theme.palette.secondary.main }}>
-                        Material-UI
+                        Redux
                       </ListItemText>
                     </ListItem>
                   </List>
@@ -140,7 +140,7 @@ const About = ({classes, width}) => {
                       <ForwardIcon style={{ color: theme.palette.primary.dark }} />
                     </ListItemIcon>
                     <ListItemText style={{ fontFamily: "Roboto", fontWeight: "500", color: theme.palette.secondary.main }}>
-                      Material-UI
+                      Drupal 8
                     </ListItemText>
                   </ListItem>
                   <ListItem>
@@ -148,7 +148,7 @@ const About = ({classes, width}) => {
                       <ForwardIcon style={{ color: theme.palette.primary.dark }} />
                     </ListItemIcon>
                     <ListItemText style={{ fontFamily: "Roboto", fontWeight: "500", color: theme.palette.secondary.main }}>
-                      HTML & CSS
+                      PHP
                     </ListItemText>
                   </ListItem>
                   <ListItem>
@@ -156,7 +156,7 @@ const About = ({classes, width}) => {
                       <ForwardIcon style={{ color: theme.palette.primary.dark }} />
                     </ListItemIcon>
                     <ListItemText style={{ fontFamily: "Roboto", fontWeight: "500", color: theme.palette.secondary.main }}>
-                      Node.js
+                      Bootstrap
                     </ListItemText>
                   </ListItem>
                   <ListItem>
@@ -164,7 +164,7 @@ const About = ({classes, width}) => {
                       <ForwardIcon style={{ color: theme.palette.primary.dark }} />
                     </ListItemIcon>
                     <ListItemText style={{ fontFamily: "Roboto", fontWeight: "500", color: theme.palette.secondary.main }}>
-                      Material-UI
+                      Redux
                     </ListItemText>
                   </ListItem>
                 </List>
@@ -176,22 +176,14 @@ const About = ({classes, width}) => {
           ? <Grid item xs={12} sm={4}>
             <img
               alt=""
-              src={
-                url.includes("http://localhost:3000/")
-                  ? "/images/profile.jpg"
-                  : "https://williamlim26.github.io/wcc2/images/profile.jpg"
-              }
+              src= {`${assetUrl}/images/profile.jpg`}
               style={{ margin: "50px auto 0 auto", borderRadius: "10px", width: "100%", height: "auto", maxWidth: "250px", display: "block"}}
             />
           </Grid>
           : <Grid item xs={12} sm={4} alignItems="center" container>
             <img
               alt=""
-              src={
-                url.includes("http://localhost:3000/")
-                  ? "/images/profile.jpg"
-                  : "https://williamlim26.github.io/wcc2/images/profile.jpg"
-              }
+              src= {`${assetUrl}/images/profile.jpg`}
               style={{ margin: "50px auto 0 auto", borderRadius: "10px", width: "100%", height: "auto", maxWidth: "250px", display: "block"}}
             />
           </Grid>

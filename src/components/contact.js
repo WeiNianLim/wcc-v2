@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import theme from '../theme.js'
 import withWidth, { isWidthUp } from "@material-ui/core/withWidth";
 import Button from "@material-ui/core/Button";
@@ -6,6 +6,7 @@ import Typography from "@material-ui/core/Typography";
 import Grid from '@material-ui/core/Grid';
 import Divider from "@material-ui/core/Divider";
 import { withStyles } from "@material-ui/core/styles";
+import { AppContext } from '../AppContext';
 
 const styles = {
   contactButtonRoot: {
@@ -45,6 +46,7 @@ const styles = {
 }
 
 const Contact = ({classes, width}) => {
+  const { EMAIL } = useContext(AppContext)
 
   return (
     <section id="contact" style={{ marginTop: "100px", paddingTop: "100px" }}>
@@ -77,7 +79,7 @@ const Contact = ({classes, width}) => {
             }}
             color="theme.palette.primary.main"
             style={{ marginTop: "50px", marginLeft: "0px" }}
-            href="mailto:weinianlim26@gmail.com"
+            href={`mailto:${EMAIL}`}
             target="_blank"
           >
             Say Hi

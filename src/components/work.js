@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { useState, useContext } from "react";
 import theme from '../theme.js'
 import withWidth, { isWidthUp } from "@material-ui/core/withWidth";
 import Typography from "@material-ui/core/Typography";
@@ -8,6 +8,7 @@ import { withStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import Dialog from '@material-ui/core/Dialog';
 import DialogContent from '@material-ui/core/DialogContent';
+import { AppContext } from '../AppContext';
 
 const styles = {
   divider: {
@@ -37,163 +38,141 @@ const styles = {
   }
 }
 
-class Work extends Component{
+const Work = (props) => {
+  const { assetUrl } = useContext(AppContext)
 
-  state = {
-    openEMF: false,
-    openFM: false,
-    emfList: ["1", "2", "3", "4", "5", "6"],
-    fmList: ["ma1", "ma2", "ma3", "ma4"]
-  }
+  const [openEMF, setOpenEMF] = useState(false);
+  const [openFM, setOpenFM] = useState(false);
+  const emfList = ["1", "2", "3", "4", "5", "6"];
+  const fmList = ["ma1", "ma2", "ma3", "ma4"];
 
-  handleOpenDialog = (dialog) => {
+  const handleOpenDialog = (dialog) => {
     if (dialog === "emf"){
-      this.setState({openEMF: true})
+      setOpenEMF(true)
     } else {
-      this.setState({openFM: true})
+      setOpenFM(true)
     }
   }
 
-  handleCloseDialog = () => {
-    this.setState({openEMF: false, openFM: false})
+  const handleCloseDialog = () => {
+    setOpenEMF(false)
+    setOpenFM(false)
   }
   
-  render (){
 
-    const {classes, width} = this.props;
-    const url = window.location.href;
+  const {classes, width} = props;
+  const url = window.location.href;
 
-    return (
-      <section id="work" style={{ margin: "50px auto 0 auto", paddingTop: "30px", maxWidth: "1000px" }}>
-        <Typography variant="h4" style={{ marginTop: "10px", fontFamily: "Roboto", fontWeight: "500", color: theme.palette.secondary.light }}>
-          A Glance At My Projects
-        </Typography>
-        <Divider variant="inset" className={classes.divider} style={{ marginBottom: "50px" }} />
-        <Grid container spacing={4}>
-          <Grid item xs={12} sm={5}>
-            <Button onClick={() => this.handleOpenDialog("emf")}>
-              <img
-                alt=""
-                src={
-                  url.includes("http://localhost:3000/")
-                    ? "/images/wa.png"
-                    : "https://williamlim26.github.io/wcc2/images/wa.png"
-                }
-                style={{ margin: "50px auto 0 auto", width: "100%", height: "auto", maxWidth: "250px", display: "block"}}
-              />
-            </Button>
-          </Grid>
-          <Grid item xs={12} sm={7}>
-            <Typography variant="h5" style={{ marginTop: "10px", fontFamily: "Roboto", fontWeight: "500", color: theme.palette.secondary.light }}>
-              Enjoy My Food
-            </Typography>
-            <Typography variant="h6" style={{ marginTop: "20px", fontFamily: "Roboto", fontWeight: "400", color: theme.palette.secondary.main }}>
-              A web app built with React, Node.js,
-              Express and MongoDB, a platform
-              where people can sell their food
-              products
-            </Typography>
-          </Grid>
-          {isWidthUp("sm", width)
-            ? <>
-                <Grid item xs={12} sm={7}>
-                  <Typography variant="h5" style={{ marginTop: "10px", fontFamily: "Roboto", fontWeight: "500", color: theme.palette.secondary.light }}>
-                    Fun Math
-                    </Typography>
-                  <Typography variant="h6" style={{ marginTop: "20px", fontFamily: "Roboto", fontWeight: "400", color: theme.palette.secondary.main }}>
-                    An android app built with AndEngine, an
-                    education app that teaches kids to count
-                    better
-                    </Typography>
-                </Grid>
-                <Grid item xs={12} sm={5}>
-                  <Button onClick={() => this.handleOpenDialog("fm")}>
-                    <img
-                      alt=""
-                      src={
-                        url.includes("http://localhost:3000/")
-                          ? "/images/ma.png"
-                          : "https://williamlim26.github.io/wcc2/images/ma.png"
-                      }
-                      style={{ margin: "50px auto 0 auto", width: "100%", height: "auto", maxWidth: "250px", display: "block"}}
-                    />
-                  </Button>
-                </Grid>
-              </>
-            : <>
-                <Grid item xs={12} sm={5}>
-                  <Button onClick={() => this.handleOpenDialog("fm")}>
-                    <img
-                      alt=""
-                      src={
-                        url.includes("http://localhost:3000/")
-                          ? "/images/ma.png"
-                          : "https://williamlim26.github.io/wcc2/images/ma.png"
-                      }
-                      style={{ margin: "50px auto 0 auto", width: "100%", height: "auto", maxWidth: "250px", display: "block"}}
-                    />
-                  </Button>
-                </Grid>
-                <Grid item xs={12} sm={7}>
-                  <Typography variant="h5" style={{ marginTop: "10px", fontFamily: "Roboto", fontWeight: "500", color: theme.palette.secondary.light }}>
-                    Fun Math
-                  </Typography>
-                  <Typography variant="h6" style={{ marginTop: "20px", fontFamily: "Roboto", fontWeight: "400", color: theme.palette.secondary.main }}>
-                    An Android App built with AndEngine, an
-                    education app that teaches kids to count
-                    better
-                  </Typography>
-                </Grid>
-              </>
-          }
+  return (
+    <section id="work" style={{ margin: "50px auto 0 auto", paddingTop: "30px", maxWidth: "1000px" }}>
+      <Typography variant="h4" style={{ marginTop: "10px", fontFamily: "Roboto", fontWeight: "500", color: theme.palette.secondary.light }}>
+        A Glance At My Projects
+      </Typography>
+      <Divider variant="inset" className={classes.divider} style={{ marginBottom: "50px" }} />
+      <Grid container spacing={4}>
+        <Grid item xs={12} sm={5}>
+          <Button onClick={() => handleOpenDialog("emf")}>
+            <img
+              alt=""
+              src={`${assetUrl}/images/wa.png`}
+              style={{ margin: "50px auto 0 auto", width: "100%", height: "auto", maxWidth: "250px", display: "block"}}
+            />
+          </Button>
         </Grid>
-        <Dialog
-          fullWidth={true}
-          maxWidth={isWidthUp("sm", width) ? "md" : "xl"}
-          open={this.state.openEMF}
-          onClose={this.handleCloseDialog}
-          scroll="paper"
-        >
-          <DialogContent>
-            {this.state.emfList.map(e =>
-              <img
-                alt=""
-                src={
-                  url.includes("http://localhost:3000/")
-                    ? `/images/${e}.png`
-                    : `https://williamlim26.github.io/wcc2/images/${e}.png`
-                }
-                style={{marginTop: "25px" ,marginBottom: "25px", width: "100%", height: "auto"}}
-              />
-              )
-            }
-          </DialogContent>
-        </Dialog>
-        <Dialog
-          fullWidth={true}
-          maxWidth={isWidthUp("sm", width) ? "md" : "xl"}
-          open={this.state.openFM}
-          onClose={this.handleCloseDialog}
-          scroll="paper"
-        >
-          <DialogContent>
-            {this.state.fmList.map(e =>
-              <img
-                alt=""
-                src={
-                  url.includes("http://localhost:3000/")
-                    ? `/images/${e}.png`
-                    : `https://williamlim26.github.io/wcc2/images/${e}.png`
-                }
-                style={{marginTop: "25px" ,marginBottom: "25px", width: "100%", height: "auto"}}
-              />
-              )
-            }
-          </DialogContent>
-        </Dialog>
-      </section>
-    )
-  }
+        <Grid item xs={12} sm={7}>
+          <Typography variant="h5" style={{ marginTop: "10px", fontFamily: "Roboto", fontWeight: "500", color: theme.palette.secondary.light }}>
+            Enjoy My Food
+          </Typography>
+          <Typography variant="h6" style={{ marginTop: "20px", fontFamily: "Roboto", fontWeight: "400", color: theme.palette.secondary.main }}>
+            A web app built with React, Node.js,
+            Express and MongoDB, a platform
+            where people can sell their food
+            products
+          </Typography>
+        </Grid>
+        {isWidthUp("sm", width)
+          ? <>
+              <Grid item xs={12} sm={7}>
+                <Typography variant="h5" style={{ marginTop: "10px", fontFamily: "Roboto", fontWeight: "500", color: theme.palette.secondary.light }}>
+                  Fun Math
+                  </Typography>
+                <Typography variant="h6" style={{ marginTop: "20px", fontFamily: "Roboto", fontWeight: "400", color: theme.palette.secondary.main }}>
+                  An android app built with AndEngine, an
+                  education app that teaches kids to count
+                  better
+                  </Typography>
+              </Grid>
+              <Grid item xs={12} sm={5}>
+                <Button onClick={() => handleOpenDialog("fm")}>
+                  <img
+                    alt=""
+                    src={`${assetUrl}/images/ma.png`}
+                    style={{ margin: "50px auto 0 auto", width: "100%", height: "auto", maxWidth: "250px", display: "block"}}
+                  />
+                </Button>
+              </Grid>
+            </>
+          : <>
+              <Grid item xs={12} sm={5}>
+                <Button onClick={() => handleOpenDialog("fm")}>
+                  <img
+                    alt=""
+                    src={`${assetUrl}/images/ma.png`}
+                    style={{ margin: "50px auto 0 auto", width: "100%", height: "auto", maxWidth: "250px", display: "block"}}
+                  />
+                </Button>
+              </Grid>
+              <Grid item xs={12} sm={7}>
+                <Typography variant="h5" style={{ marginTop: "10px", fontFamily: "Roboto", fontWeight: "500", color: theme.palette.secondary.light }}>
+                  Fun Math
+                </Typography>
+                <Typography variant="h6" style={{ marginTop: "20px", fontFamily: "Roboto", fontWeight: "400", color: theme.palette.secondary.main }}>
+                  An Android App built with AndEngine, an
+                  education app that teaches kids to count
+                  better
+                </Typography>
+              </Grid>
+            </>
+        }
+      </Grid>
+      <Dialog
+        fullWidth={true}
+        maxWidth={isWidthUp("sm", width) ? "md" : "xl"}
+        open={openEMF}
+        onClose={handleCloseDialog}
+        scroll="paper"
+      >
+        <DialogContent>
+          {emfList.map(e =>
+            <img
+              alt=""
+              src={`${assetUrl}/images/${e}.png`}
+              style={{marginTop: "25px" ,marginBottom: "25px", width: "100%", height: "auto"}}
+            />
+            )
+          }
+        </DialogContent>
+      </Dialog>
+      <Dialog
+        fullWidth={true}
+        maxWidth={isWidthUp("sm", width) ? "md" : "xl"}
+        open={openFM}
+        onClose={handleCloseDialog}
+        scroll="paper"
+      >
+        <DialogContent>
+          {fmList.map(e =>
+            <img
+              alt=""
+              src={`${assetUrl}/images/${e}.png`}
+              style={{marginTop: "25px" ,marginBottom: "25px", width: "100%", height: "auto"}}
+            />
+            )
+          }
+        </DialogContent>
+      </Dialog>
+    </section>
+  )
 }
 
 export default withWidth()(withStyles(styles)(Work))
