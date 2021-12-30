@@ -28,7 +28,7 @@ const styles = {
   
 const { href } = window.location;
 
-const ASSETS_URL = "https://williamlim26.github.io/wcc";
+const ASSETS_URL = "https://williamlim26.github.io/wcc2";
 const GITHUB = "https://github.com/williamlim26";
 const EMAIL = "weinianlim26@gmail.com";
 const LINKEDIN = "https://www.linkedin.com/in/williamwnl/";
