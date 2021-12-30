@@ -34,6 +34,8 @@ const styles = {
   }
 }
 
+const skills = ["Javascript(ES5 & ES6)", "React", "Drupal 8", "PHP", "Bootstrap", "Material-UI", "Jest", "React Testing Library"]
+
 const About = ({classes, width}) => {
   const { assetUrl } = useContext(AppContext)
 
@@ -60,113 +62,49 @@ const About = ({classes, width}) => {
           <Grid container spacing={3}>
             {isWidthUp("sm", width)
               ? <>
-                <Grid item xs={12} sm={6}>
-                  <List >
-                    <ListItem>
-                      <ListItemIcon>
-                        <ForwardIcon style={{ color: theme.palette.primary.dark }} />
-                      </ListItemIcon>
-                      <ListItemText style={{ fontFamily: "Roboto", fontWeight: "500", color: theme.palette.secondary.main }}>
-                        Javascript(ES5 & ES6)
-                      </ListItemText>
-                    </ListItem>
-                    <ListItem>
-                      <ListItemIcon>
-                        <ForwardIcon style={{ color: theme.palette.primary.dark }} />
-                      </ListItemIcon>
-                      <ListItemText style={{ fontFamily: "Roboto", fontWeight: "500", color: theme.palette.secondary.main }}>
-                        React
-                      </ListItemText>
-                    </ListItem>
-                    <ListItem>
-                      <ListItemIcon>
-                        <ForwardIcon style={{ color: theme.palette.primary.dark }} />
-                      </ListItemIcon>
-                      <ListItemText style={{ fontFamily: "Roboto", fontWeight: "500", color: theme.palette.secondary.main }}>
-                        Drupal 8
-                      </ListItemText>
-                    </ListItem>
+                <Grid item xs={6}>
+                  <List>
+                    {skills.slice(0, Math.ceil(skills.length/2)).map(
+                      skill => 
+                        <ListItem>
+                          <ListItemIcon>
+                            <ForwardIcon style={{ color: theme.palette.primary.dark }} />
+                          </ListItemIcon>
+                          <ListItemText style={{ fontFamily: "Roboto", fontWeight: "500", color: theme.palette.secondary.main }}>
+                            {skill}
+                          </ListItemText>
+                        </ListItem>
+                    )}
                   </List>
                 </Grid>
-                <Grid item xs={12} sm={6}>
-                  <List >
-                    <ListItem>
-                      <ListItemIcon>
-                        <ForwardIcon style={{ color: theme.palette.primary.dark }} />
-                      </ListItemIcon>
-                      <ListItemText style={{ fontFamily: "Roboto", fontWeight: "500", color: theme.palette.secondary.main }}>
-                        PHP
-                      </ListItemText>
-                    </ListItem>
-                    <ListItem>
-                      <ListItemIcon>
-                        <ForwardIcon style={{ color: theme.palette.primary.dark }} />
-                      </ListItemIcon>
-                      <ListItemText style={{ fontFamily: "Roboto", fontWeight: "500", color: theme.palette.secondary.main }}>
-                        Bootstrap
-                      </ListItemText>
-                    </ListItem>
-                    <ListItem>
-                      <ListItemIcon>
-                        <ForwardIcon style={{ color: theme.palette.primary.dark }} />
-                      </ListItemIcon>
-                      <ListItemText style={{ fontFamily: "Roboto", fontWeight: "500", color: theme.palette.secondary.main }}>
-                        Redux
-                      </ListItemText>
-                    </ListItem>
+                <Grid item xs={6}>
+                  <List>
+                    {skills.slice(Math.ceil(skills.length/2)).map(
+                      skill => 
+                        <ListItem>
+                          <ListItemIcon>
+                            <ForwardIcon style={{ color: theme.palette.primary.dark }} />
+                          </ListItemIcon>
+                          <ListItemText style={{ fontFamily: "Roboto", fontWeight: "500", color: theme.palette.secondary.main }}>
+                            {skill}
+                          </ListItemText>
+                        </ListItem>
+                    )}
                   </List>
                 </Grid>
               </>
               : <Grid item xs>
                 <List >
-                  <ListItem>
-                    <ListItemIcon>
-                      <ForwardIcon style={{ color: theme.palette.primary.dark }} />
-                    </ListItemIcon>
-                    <ListItemText style={{ fontFamily: "Roboto", fontWeight: "500", color: theme.palette.secondary.main }}>
-                      Javascript(ES5 & ES6)
-                    </ListItemText>
-                  </ListItem>
-                  <ListItem>
-                    <ListItemIcon>
-                      <ForwardIcon style={{ color: theme.palette.primary.dark }} />
-                    </ListItemIcon>
-                    <ListItemText style={{ fontFamily: "Roboto", fontWeight: "500", color: theme.palette.secondary.main }}>
-                      React
-                    </ListItemText>
-                  </ListItem>
-                  <ListItem>
-                    <ListItemIcon>
-                      <ForwardIcon style={{ color: theme.palette.primary.dark }} />
-                    </ListItemIcon>
-                    <ListItemText style={{ fontFamily: "Roboto", fontWeight: "500", color: theme.palette.secondary.main }}>
-                      Drupal 8
-                    </ListItemText>
-                  </ListItem>
-                  <ListItem>
-                    <ListItemIcon>
-                      <ForwardIcon style={{ color: theme.palette.primary.dark }} />
-                    </ListItemIcon>
-                    <ListItemText style={{ fontFamily: "Roboto", fontWeight: "500", color: theme.palette.secondary.main }}>
-                      PHP
-                    </ListItemText>
-                  </ListItem>
-                  <ListItem>
-                    <ListItemIcon>
-                      <ForwardIcon style={{ color: theme.palette.primary.dark }} />
-                    </ListItemIcon>
-                    <ListItemText style={{ fontFamily: "Roboto", fontWeight: "500", color: theme.palette.secondary.main }}>
-                      Bootstrap
-                    </ListItemText>
-                  </ListItem>
-                  <ListItem>
-                    <ListItemIcon>
-                      <ForwardIcon style={{ color: theme.palette.primary.dark }} />
-                    </ListItemIcon>
-                    <ListItemText style={{ fontFamily: "Roboto", fontWeight: "500", color: theme.palette.secondary.main }}>
-                      Redux
-                    </ListItemText>
-                  </ListItem>
+                  { skills.map(skill => 
+                     <ListItem>
+                      <ListItemIcon>
+                        <ForwardIcon style={{ color: theme.palette.primary.dark }} />
+                      </ListItemIcon>
+                      <ListItemText style={{ fontFamily: "Roboto", fontWeight: "500", color: theme.palette.secondary.main }}>
+                        {skill}
+                      </ListItemText>
+                    </ListItem>
+                  )}
                 </List>
               </Grid>
             }

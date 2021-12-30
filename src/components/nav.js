@@ -98,19 +98,19 @@ const Nav = (props) => {
     window.removeEventListener("scroll", handleScroll);
   }, [])
 
-  const handleDrawerOpen = () => {
-    setOpen(true);
-  };
-
-  const handleDrawerClose = () => {
-    setOpen(false)
-  };
-
   const handleScroll = event => {
     setBackgroundShadow(window.pageYOffset > 200 ? "inset 0px -7px 11px -10px rgba(32,77,75,1)" : "none");
   };
 
   const {classes, width} = props;
+
+  const navs = [
+    { label: "About", href: "#aboutMe", target: "_self" },
+    { label: "Experience", href: "#experience", target: "_self" },
+    { label: "Work", href: "#work", target: "_self" },
+    { label: "Contact", href: "#contact", target: "_self" },
+    { label: "Resume", href: `${assetUrl}/images/resume.pdf`, target: "_blank" },
+  ]
 
   return (
     <>
@@ -118,163 +118,57 @@ const Nav = (props) => {
         <AppBar className={classes.appBar} style={{ boxShadow: backgroundShadow }}>
           {isWidthUp("sm", width) ? (
             <Toolbar>
-              <a
-                href="#landing"
-                className={classes.anchorTag}
-              >
+              <a href="#landing" className={classes.anchorTag}>
                 <img
                   alt="William Lim Site's Logo"
                   src= {`${assetUrl}/images/logo.png`}
-                  style={{
-                    width: "auto",
-                    maxHeight: "45px"
-                  }}
+                  style={{ width: "auto", maxHeight: "45px" }}
                 />
               </a>
               <div className={classes.grow}></div>
-              <Button
-                className={classes.button}
-                classes={{
-                  root: classes.buttonRoot,
-                  label: classes.buttonLabel
-                }}
-                href="#aboutMe"
-              >
-                About
-              </Button>
-              <Button
-                className={classes.button}
-                classes={{
-                  root: classes.buttonRoot,
-                  label: classes.buttonLabel
-                }}
-                href="#experience"
-              >
-                Experience
-              </Button>
-              <Button
-                className={classes.button}
-                classes={{
-                  root: classes.buttonRoot,
-                  label: classes.buttonLabel
-                }}
-                href="#work"
-              >
-                Work
-              </Button>
-              <Button
-                className={classes.button}
-                classes={{
-                  root: classes.buttonRoot,
-                  label: classes.buttonLabel
-                }}
-                href="#contact"
-              >
-                Contact
-              </Button>
-              <Button
-                className={classes.button}
-                classes={{
-                  root: classes.buttonRoot,
-                  label: classes.buttonLabel
-                }}
-                href={`${assetUrl}/images/resume.pdf`}
-                target="_blank"
-              >
-                Resume
-              </Button>
+              { navs.map(nav => 
+                <Button
+                  className={classes.button}
+                  classes={{ root: classes.buttonRoot, label: classes.buttonLabel }}
+                  href={nav.href}
+                  target={nav.target}
+                >
+                  {nav.label}
+                </Button>
+              )}
             </Toolbar>
           ) : (
               <Toolbar>
-                <a
-                href="#landing"
-                className={classes.anchorTag}
-                >
+                <a href="#landing" className={classes.anchorTag}>
                   <img
                     alt="William Lim Site's Logo"
                     src={`${assetUrl}/images/logo.png`}
-                    style={{
-                      width: "auto",
-                      maxHeight: "45px"
-                    }} 
+                    style={{ width: "auto", maxHeight: "45px" }}
                   />
                 </a>
                 <div className={classes.grow}></div>
-                <IconButton className={classes.menuButton} onClick={handleDrawerOpen}>
+                <IconButton className={classes.menuButton} onClick={() => setOpen(true)}>
                   <MenuIcon />
                 </IconButton>
               </Toolbar>
             )}
         </AppBar>
       </HideOnScroll>
-      <Drawer classes={{ root: classes.drawer }} open={open} onClose={handleDrawerClose} anchor='right'>
+      <Drawer classes={{ root: classes.drawer }} open={open} onClose={() => setOpen(false)} anchor='right'>
         <List>
-          <ListItem>
-            <Button
-              className={classes.button}
-              classes={{
-                root: classes.drawerButtonRoot,
-                label: classes.buttonLabel
-              }}
-              href="#aboutMe"
-              onClick={handleDrawerClose}
-            >
-              About
-            </Button>
-          </ListItem>
-          <ListItem>
-            <Button
-              className={classes.button}
-              classes={{
-                root: classes.drawerButtonRoot,
-                label: classes.buttonLabel
-              }}
-              href="#experience"
-              onClick={handleDrawerClose}
-            >
-              Experience
-            </Button>
-          </ListItem>
-          <ListItem>
-            <Button
-              className={classes.button}
-              classes={{
-                root: classes.drawerButtonRoot,
-                label: classes.buttonLabel
-              }}
-              href="#work"
-              onClick={handleDrawerClose}
-            >
-              Work
-            </Button>
-          </ListItem>
-          <ListItem>
-            <Button
-              className={classes.button}
-              classes={{
-                root: classes.drawerButtonRoot,
-                label: classes.buttonLabel
-              }}
-              href="#contact"
-              onClick={handleDrawerClose}
-            >
-              Contact
-            </Button>
-          </ListItem>
-          <ListItem>
-            <Button
-              className={classes.button}
-              classes={{
-                root: classes.drawerButtonRoot,
-                label: classes.buttonLabel
-              }}
-              href={`${assetUrl}/images/resume.pdf`}
-              target="_blank"
-              onClick={handleDrawerClose}
-            >
-              Resume
-            </Button>
-          </ListItem>
+          { navs.map(nav => 
+            <ListItem>
+              <Button
+                className={classes.button}
+                classes={{ root: classes.drawerButtonRoot, label: classes.buttonLabel }}
+                onClick={() => setOpen(false)}
+                href={nav.href}
+                target={nav.target}
+              >
+                {nav.label}
+              </Button>
+            </ListItem>
+          )}
         </List>
       </Drawer>
     </>
